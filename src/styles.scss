@@ -1,0 +1,53 @@
+@import "~@angular/material/theming";
+@import "variables";
+@include mat-core();
+
+@include angular-material-theme($final-theme);
+
+html,
+body {
+	font-family: $font-family;
+	background-color: $background-color;
+	color: white;
+}
+
+body {
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $primary;
+}
+
+.form-control {
+	width: 100%;
+}
+
+a {
+	color: $primary;
+	text-decoration: none;
+
+	&:hover {
+		color: darken($primary, 10%);
+		text-decoration: underline;
+	}
+}
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border: 0;
+	border-top: 1px solid lighten($background-color, 15%);
+}
+
+.alert {
+	width: 100%;
+	padding: 9px;
+
+	&.alert-danger {
+		background-color: red;
+	}
+}

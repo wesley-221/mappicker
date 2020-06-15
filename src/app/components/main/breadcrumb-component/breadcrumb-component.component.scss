@@ -1,0 +1,32 @@
+@import 'variables';
+
+.breadcrumb-container {
+	margin-bottom: 1rem;
+}
+
+.breadcrumb {
+	display: flex;
+	flex-wrap: wrap;
+	padding: .75rem 1rem;
+
+	list-style: none;
+}
+
+.breadcrumb-item {
+	display: flex;
+
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+
+	+ .breadcrumb-item {
+		padding-left: .5rem;
+
+		&::before {
+			display: inline-block;
+			padding-right: .5rem;
+			content: "/";
+			color: #6c757d;
+		}
+	}
+}

@@ -1,0 +1,15 @@
+<mat-toolbar class="fixed-header">
+	<h2 class="brand" [routerLink]="['/']">wyPicker</h2>
+
+	<span class="nav-spacing"></span>
+
+	<div class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">profile</div>
+
+	<button mat-icon-button class="mobile-nav" [matMenuTriggerFor]="navbarMenu">
+		<mat-icon>dehaze</mat-icon>
+	</button>
+
+	<mat-menu #navbarMenu="matMenu">
+		<button mat-menu-item [routerLink]="['/profile']">profile</button>
+	</mat-menu>
+</mat-toolbar>

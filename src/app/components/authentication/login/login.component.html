@@ -1,0 +1,50 @@
+<div class="login-container">
+	<div class="login">
+		<div class="header">
+			<div class="header-image"></div>
+		</div>
+
+		<div class="title">
+			Login <br />
+			<a [routerLink]="['/register']">No account yet? Click here</a>
+		</div>
+
+		<div class="body">
+			<div class="row">
+				<div class="col-xs-12 col-lg-8 offset-lg-2">
+					<form [formGroup]="loginForm" *ngIf="!authService.isLoggedIn">
+						<mat-form-field class="form-control">
+							<mat-label>Username</mat-label>
+							<input matInput formControlName="username" />
+						</mat-form-field>
+
+						<mat-form-field class="form-control">
+							<mat-label>Password</mat-label>
+							<input matInput type="password" formControlName="password" />
+						</mat-form-field>
+
+						<div class="center">
+							<button (click)="login()" [disabled]="loginForm.invalid" mat-raised-button color="accent">Login</button>
+						</div>
+					</form>
+
+					<div *ngIf="authService.isLoggedIn">
+						<div class="center-text">Logged in as&nbsp;<b>{{ authService.user.username }}</b></div>
+
+						<div class="spacing"></div>
+
+						<div class="center">
+							<button (click)="logout()" mat-raised-button color="warn">Logout</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="alert-area" *ngIf="error != null">
+	<div class="alert alert-danger">
+		{{ error }}
+	</div>
+</div>

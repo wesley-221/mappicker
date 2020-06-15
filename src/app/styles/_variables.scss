@@ -1,0 +1,157 @@
+@import '~@angular/material/theming';
+
+$md-primary: (
+    50 : #fff2ef,
+    100 : #fee0d7,
+    200 : #fdcbbc,
+    300 : #fcb6a1,
+    400 : #fca68c,
+    500 : #fb9678,
+    600 : #fa8e70,
+    700 : #fa8365,
+    800 : #f9795b,
+    900 : #f86848,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffece8,
+    A700 : #ffd7cf,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-accent: (
+    50 : #e0f4ee,
+    100 : #b3e3d5,
+    200 : #80d1b9,
+    300 : #4dbe9d,
+    400 : #26b088,
+    500 : #00a273,
+    600 : #009a6b,
+    700 : #009060,
+    800 : #008656,
+    900 : #007543,
+    A100 : #a3ffd1,
+    A200 : #70ffb8,
+    A400 : #3dff9e,
+    A700 : #24ff91,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-success: (
+    50 : #e0f6f1,
+    100 : #b3eadb,
+    200 : #80dcc3,
+    300 : #4dcdab,
+    400 : #26c399,
+    500 : #00b887,
+    600 : #00b17f,
+    700 : #00a874,
+    800 : #00a06a,
+    900 : #009157,
+    A100 : #bdffe0,
+    A200 : #8affc9,
+    A400 : #57ffb1,
+    A700 : #3dffa5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-info: (
+    50 : #e4e7f7,
+    100 : #bbc4ec,
+    200 : #8e9de0,
+    300 : #6176d3,
+    400 : #3f58c9,
+    500 : #1d3bc0,
+    600 : #1a35ba,
+    700 : #152db2,
+    800 : #1126aa,
+    900 : #0a199c,
+    A100 : #c9cdff,
+    A200 : #969eff,
+    A400 : #636eff,
+    A700 : #4a57ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+// Change the font for the angular components
+$font-family: 'Montserrat', 'Open Sans', Arial, Helvetica, sans-serif;
+$typography: mat-typography-config(
+	$font-family
+);
+
+@include angular-material-typography($typography);
+
+// Setup the theme
+$theme-primary: mat-palette($md-primary);
+$theme-accent: mat-palette($md-accent, A200, A100, A400);
+$theme-warn: mat-palette($mat-red);
+$theme-success: mat-palette($md-success);
+$final-theme: mat-dark-theme($theme-primary, $theme-success, $theme-warn);
+
+// Export default colours to use everywhere
+$primary: map-get($theme-primary, 500);
+$accent: map-get($theme-success, 500);
+$warn: map-get($mat-red, 500);
+$info: map-get($md-info, 500);
+
+$background-color: #121212;
+$tile-background-color: #1d1d1d;

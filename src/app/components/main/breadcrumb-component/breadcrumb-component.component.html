@@ -1,0 +1,12 @@
+<mat-toolbar class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item" *ngFor="let menuItem of menu">
+			<ng-container *ngIf="menuItem == lastItem; else notLastItem">
+				{{ menuItem[0] }}
+			</ng-container>
+			<ng-template #notLastItem>
+				<a [routerLink]="[menuItem[1]]">{{ menuItem[0] }}</a>
+			</ng-template>
+		</li>
+	</ol>
+</mat-toolbar>

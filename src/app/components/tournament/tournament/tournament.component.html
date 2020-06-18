@@ -1,5 +1,11 @@
-<div class="tournament" (click)="navigateToTournament(tournament)">
-	<h2>{{ tournament.tournamentName }}</h2>
+<div class="tournament" (click)="navigateToTournament(tournament, $event)">
+	<div class="header">
+		<h2>{{ tournament.tournamentName }}</h2>
+
+		<div class="all-buttons" *ngIf="tournament.isCreator(authService.user)">
+			<button mat-mini-fab color="warn" (click)="deleteTournament(tournament)"><mat-icon>delete</mat-icon></button>
+		</div>
+	</div>
 
 	<div class="mappickers">
 		<h4>Mappickers</h4>

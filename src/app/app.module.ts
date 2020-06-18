@@ -30,6 +30,7 @@ import { UserPickerComponent } from './components/tournament/user-picker/user-pi
 import { TournamentComponent } from './components/tournament/tournament/tournament.component';
 import { TournamentViewComponent } from './components/tournament/tournament-view/tournament-view.component';
 import { TournamentInterfaceComponent } from './components/tournament/tournament-interface/tournament-interface.component';
+import { DeleteTournamentComponent } from './components/dialogs/delete-tournament/delete-tournament.component';
 
 @NgModule({
 	declarations: [
@@ -49,7 +50,8 @@ import { TournamentInterfaceComponent } from './components/tournament/tournament
 		UserPickerComponent,
 		TournamentComponent,
 		TournamentViewComponent,
-		TournamentInterfaceComponent
+		TournamentInterfaceComponent,
+		DeleteTournamentComponent
 	],
 	imports: [
 		BrowserModule,

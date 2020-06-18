@@ -28,7 +28,7 @@ export class TournamentService {
 		this.finishedImporting$.next(false);
 
 		this.httpClient.get<Tournament[]>(`${this.apiUrl}wypicker/tournament`).subscribe(response => {
-			for(let tournament in response) {
+			for (let tournament in response) {
 				this.allTournaments.push(Tournament.serializeJson(response[tournament]));
 			}
 
@@ -52,12 +52,28 @@ export class TournamentService {
 	}
 
 	/**
+	 * Endpoint to update an existing tournament
+	 * @param tournament
+	 */
+	updateTournament(tournament: Tournament): Observable<Tournament> {
+		return this.httpClient.post<Tournament>(`${this.apiUrl}wypicker/tournament`, tournament);
+	}
+
+	/**
+	 * Endpoint to delete an existing tournament
+	 * @param tournament
+	 */
+	deleteTournament(tournament: Tournament): Observable<any> {
+		return this.httpClient.delete<Tournament>(`${this.apiUrl}wypicker/tournament/${tournament.id}`);
+	}
+
+	/**
 	 * Get a tournament by the given id
 	 * @param tournamentId the id of the tournament to get
 	 */
 	getTournamentById(tournamentId: number): Tournament {
-		for(let tournament in this.allTournaments) {
-			if(this.allTournaments[tournament].id == tournamentId) {
+		for (let tournament in this.allTournaments) {
+			if (this.allTournaments[tournament].id == tournamentId) {
 				return this.allTournaments[tournament];
 			}
 		}

@@ -9,6 +9,9 @@ import { TournamentOverviewComponent } from './components/tournament/tournament-
 import { TournamentCreationComponent } from './components/tournament/tournament-creation/tournament-creation.component';
 import { TournamentViewComponent } from './components/tournament/tournament-view/tournament-view.component';
 import { LoggedInGuard } from './guards/logged-in-guard';
+import { environment } from '../environments/environment';
+
+const loginGuardsForProd = environment.production == true ? [ LoggedInGuard ] : [];
 
 const routes: Routes = [
 	{
@@ -18,9 +21,9 @@ const routes: Routes = [
 			{ path: 'profile', component: LoginComponent },
 			{ path: 'register', component: RegisterComponent },
 
-			{ path: 'tournament-overview', component: TournamentOverviewComponent, canActivate: [ LoggedInGuard ] },
-			{ path: 'tournament-create', component: TournamentCreationComponent, canActivate: [ LoggedInGuard ] },
-			{ path: 'tournament/:id', component: TournamentViewComponent, canActivate: [ LoggedInGuard ] },
+			{ path: 'tournament-overview', component: TournamentOverviewComponent, canActivate: [ ...loginGuardsForProd ] },
+			{ path: 'tournament-create', component: TournamentCreationComponent, canActivate: [ ...loginGuardsForProd ] },
+			{ path: 'tournament/:id', component: TournamentViewComponent, canActivate: [ ...loginGuardsForProd ] },
 
 			{ path: 'mappool-create', component: MappoolCreateComponent },
 

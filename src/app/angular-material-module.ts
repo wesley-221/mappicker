@@ -12,6 +12,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const modules: any[] = [
@@ -25,7 +27,9 @@ const modules: any[] = [
 	MatGridListModule,
 	MatDividerModule,
 	MatSelectModule,
-	MatChipsModule
+	MatChipsModule,
+	MatTabsModule,
+	MatDialogModule
 ];
 
 @NgModule({

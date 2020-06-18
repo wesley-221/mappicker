@@ -1,6 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tournament } from '../../../models/tournament';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteTournamentComponent } from '../../dialogs/delete-tournament/delete-tournament.component';
+import { TournamentService } from '../../../services/tournament.service';
+import { AuthenticationService } from '../../../services/authentication.service';
+
+export interface TournamentDeleteDialogData {
+	tournament: Tournament
+}
 
 @Component({
 	selector: 'app-tournament',
@@ -10,10 +18,29 @@ import { Router } from '@angular/router';
 export class TournamentComponent implements OnInit {
 	@Input() tournament: Tournament;
 
-	constructor(private route: Router) { }
+	constructor(private route: Router, private dialog: MatDialog, private tournamentService: TournamentService, public authService: AuthenticationService) { }
 	ngOnInit(): void { }
 
-	navigateToTournament(tournament: Tournament) {
-		this.route.navigate(['tournament', tournament.id]);
+	navigateToTournament(tournament: Tournament, event: any) {
+		// Check if click wasn't on a button
+		if (event.srcElement.className.indexOf('mat-icon') == -1) {
+			this.route.navigate(['tournament', tournament.id]);
+		}
+	}
+
+	deleteTournament(tournament: Tournament) {
+		const dialogRef = this.dialog.open(DeleteTournamentComponent, {
+			data: {
+				tournament: tournament
+			}
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result == true) {
+				this.tournamentService.deleteTournament(tournament).subscribe(() => {
+					this.tournamentService.importTournaments();
+				});
+			}
+		})
 	}
 }

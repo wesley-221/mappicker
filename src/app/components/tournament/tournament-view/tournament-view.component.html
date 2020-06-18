@@ -5,11 +5,36 @@
 	<hr />
 
 	<div class="background-area">
-		<div class="settings" *ngIf="tournament.createdBy.id == authService.user.id">
-			<h2>Settings</h2>
-			<hr />
+		<mat-tab-group mat-align-tabs="start" *ngIf="tournament.isCreator(authService.user)">
+			<mat-tab label="Settings">
+				<div class="container-fluid">
+					<hr />
+					<app-tournament-interface [tournament]="tournament" [tournamentForm]="tournamentForm"></app-tournament-interface>
 
-			<app-tournament-interface [tournament]="tournament" [tournamentForm]="tournamentForm"></app-tournament-interface>
+					<hr />
+					<h3>Updating the tournament</h3>
+					<p>Now that the tournament settings have changed, you have to update the tournament before the changes are final.</p>
+					<button mat-flat-button color="primary" (click)="updateTournament()">Update</button>
+
+					<div id="tournamentUpdatedAlert" class="alert alert-success" *ngIf="tournamentUpdated == true">
+						<h3>Successfully updated the tournament!</h3>
+					</div>
+				</div>
+			</mat-tab>
+
+			<mat-tab label="Second">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<app-mappool-overview></app-mappool-overview>
+						</div>
+					</div>
+				</div>
+			</mat-tab>
+		</mat-tab-group>
+
+		<div *ngIf="!tournament.isCreator(authService.user)">
+			<app-mappool-overview></app-mappool-overview>
 		</div>
 	</div>
 </div>

@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
 	ngOnInit() { }
 
 	login() {
-		const 	username = this.loginForm.get('username').value,
-				password = this.loginForm.get('password').value;
+		const username = this.loginForm.get('username').value,
+			password = this.loginForm.get('password').value;
 
 		const userRequest = new UserRequest();
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
 			const loggedInUser: User = new User();
 
-			loggedInUser.id = data.body.id;
+			loggedInUser.id = data.body.userId;
 			loggedInUser.username = data.body.username;
 			loggedInUser.admin = data.body.admin;
 			loggedInUser.token = data.headers.get('Authorization');

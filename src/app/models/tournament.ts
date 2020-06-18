@@ -9,6 +9,14 @@ export class Tournament {
 	createdBy: User;
 
 	/**
+	 * Check if the given user is the creator of the tournament
+	 * @param user the user to check
+	 */
+	public isCreator(user: User) {
+		return this.createdBy.id == user.id;
+	}
+
+	/**
 	 * Add a user to the mappicker team
 	 * @param user the user to add as a mappicker
 	 */
@@ -35,7 +43,7 @@ export class Tournament {
 		newTournament.tournamentName = json.tournamentName;
 		newTournament.defaultGamemode = Gamemodes[Gamemodes[json.defaultGamemode]];
 
-		for(let mappicker in json.mappickers) {
+		for (let mappicker in json.mappickers) {
 			newTournament.addMappicker(User.serializeJson(json.mappickers[mappicker]));
 		}
 
@@ -55,7 +63,7 @@ export class Tournament {
 		newTournament.tournamentName = tournament.tournamentName;
 		newTournament.defaultGamemode = tournament.defaultGamemode;
 
-		for(let mappicker in tournament.mappickers) {
+		for (let mappicker in tournament.mappickers) {
 			newTournament.addMappicker(User.makeTrueCopy(tournament.mappickers[mappicker]));
 		}
 

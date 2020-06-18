@@ -11,7 +11,7 @@ import { User } from './models/user';
 export class AppComponent {
 	constructor(private authService: AuthenticationService) {
 		this.authService.validateToken(authService.authToken).subscribe((response: any) => {
-			if(response.valid) {
+			if (response.valid) {
 				const loggedInUser: User = User.serializeJson(response.user);
 
 				this.authService.user = loggedInUser;

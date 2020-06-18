@@ -15,6 +15,8 @@ export class TournamentViewComponent implements OnInit {
 	tournament: Tournament;
 	tournamentForm: FormGroup;
 
+	tournamentUpdated: boolean = false;
+
 	constructor(private route: ActivatedRoute, private tournamentService: TournamentService, public authService: AuthenticationService) {
 		this.tournamentForm = new FormGroup({
 			'tournament-name': new FormControl('', [
@@ -27,15 +29,38 @@ export class TournamentViewComponent implements OnInit {
 
 		this.route.params.subscribe(params => {
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if(res == true) {
+				if (res == true) {
 					const thisTournament = this.tournamentService.getTournamentById(params.id);
 					this.tournament = Tournament.makeTrueCopy(thisTournament);
 
 					this.breadCrumbs.push([this.tournament.tournamentName])
+
+					this.tournamentForm.get('tournament-name').setValue(this.tournament.tournamentName);
+					this.tournamentForm.get('tournament-gamemode').setValue(this.tournament.defaultGamemode);
 				}
 			})
 		});
 	}
 
 	ngOnInit(): void { }
+
+	updateTournament() {
+		if (!this.tournamentForm.invalid) {
+			this.tournament.tournamentName = this.tournamentForm.get('tournament-name').value;
+			this.tournament.defaultGamemode = this.tournamentForm.get('tournament-gamemode').value;
+
+			this.tournamentService.updateTournament(this.tournament).subscribe(response => {
+				this.tournament = Tournament.serializeJson(response);
+				this.tournamentUpdated = true;
+
+				// Delay by a few miliseconds
+				setTimeout(() => {
+					document.getElementById('tournamentUpdatedAlert').scrollIntoView();
+				}, 100);
+			});
+		}
+		else {
+			this.tournamentForm.markAllAsTouched();
+		}
+	}
 }

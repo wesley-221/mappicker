@@ -37,10 +37,15 @@ export class TournamentCreationComponent implements OnInit {
 	ngOnInit(): void { }
 
 	createTournament() {
-		if(!this.tournamentForm.invalid) {
+		if (!this.tournamentForm.invalid) {
+			this.tournament.tournamentName = this.tournamentForm.get('tournament-name').value;
+			this.tournament.defaultGamemode = this.tournamentForm.get('tournament-gamemode').value;
+
 			this.tournamentService.createTournament(this.tournament).subscribe(response => {
 				this.tournament = Tournament.serializeJson(response);
 				this.tournamentCreated = true;
+
+				this.tournamentService.importTournaments();
 
 				// Delay by a few miliseconds
 				setTimeout(() => {

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { Router } from '@angular/router';
 import { User } from '../../../models/user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TournamentService } from '../../../services/tournament.service';
 
 @Component({
 	selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	error: String = null;
 
-	constructor(public authService: AuthenticationService, private route: Router) {
+	constructor(public authService: AuthenticationService, private route: Router, private tournamentService: TournamentService) {
 		this.loginForm = new FormGroup({
 			'username': new FormControl('', [
 				Validators.required
@@ -49,8 +50,11 @@ export class LoginComponent implements OnInit {
 
 			this.authService.user = loggedInUser;
 			this.authService.isLoggedIn = true;
+			this.authService.authToken = data.headers.get('Authorization');
 
-			this.authService.setCookie('auth', loggedInUser.token);
+			this.authService.cacheAuthenticationToken(loggedInUser.token);
+
+			this.tournamentService.importTournaments();
 		}, (err: HttpErrorResponse) => {
 			this.error = err.error.message;
 		});
@@ -58,5 +62,6 @@ export class LoginComponent implements OnInit {
 
 	logout() {
 		this.authService.logout();
+		this.tournamentService.importTournaments();
 	}
 }

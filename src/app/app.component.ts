@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
+import { User } from './models/user';
 
 @Component({
 	selector: 'app-root',
@@ -7,5 +9,17 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-	constructor() {}
+	constructor(private authService: AuthenticationService) {
+		this.authService.validateToken(authService.authToken).subscribe((response: any) => {
+			if(response.valid) {
+				const loggedInUser: User = User.serializeJson(response.user);
+
+				this.authService.user = loggedInUser;
+				this.authService.isLoggedIn = true;
+			}
+			else {
+				this.authService.deleteAuthenticationToken();
+			}
+		});
+	}
 }

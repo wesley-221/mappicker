@@ -1,0 +1,34 @@
+<mat-form-field class="form-control">
+	<mat-label>Filter by username</mat-label>
+	<input matInput [(ngModel)]="searchValue" [ngModelOptions]="{ standalone: true }" />
+</mat-form-field>
+
+<div class="row">
+	<div class="col">
+		<div class="background-area all-users">
+			<div class="user" *ngFor="let user of (allUsers | search : searchValue)">
+				<div class="username">
+					<p>{{ user.username }}</p>
+				</div>
+
+				<div class="buttons">
+					<button mat-mini-fab (click)="addNewMappicker(user)"><mat-icon>add</mat-icon></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="background-area all-users">
+			<div class="user" *ngFor="let user of selectedUsers">
+				<div class="username">
+					<p>{{ user.username }}</p>
+				</div>
+
+				<div class="buttons">
+					<button mat-mini-fab color="warn" (click)="removeMappicker(user)"><mat-icon>delete</mat-icon></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

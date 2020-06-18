@@ -1,0 +1,14 @@
+<app-breadcrumb-component [menu]="[
+['tournament overview']
+]"></app-breadcrumb-component>
+
+<h1>All your tournaments</h1>
+<button mat-fab [routerLink]="['/tournament-create']"><mat-icon>add</mat-icon></button>
+
+<div class="alert alert-info" *ngIf="tournamentService.getTournamentCount() <= 0">
+	You don't have any tournaments available.
+</div>
+
+<div class="all-tournaments background-area" *ngIf="tournamentService.getTournamentCount() > 0">
+	<app-tournament [tournament]="tournament" *ngFor="let tournament of tournamentService.allTournaments"></app-tournament>
+</div>

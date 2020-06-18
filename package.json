@@ -87,7 +87,7 @@
 		"@angular/cdk": "^9.2.4",
 		"@angular/material": "^9.2.4",
 		"jwt-decode": "^2.2.0",
-		"ngx-cookie-service": "^3.0.4"
+		"electron-store": "^5.2.0"
 	},
 	"engines": {
 		"node": ">=10.13.0"

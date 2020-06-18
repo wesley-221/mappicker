@@ -25,7 +25,7 @@ function createWindow(): BrowserWindow {
 	if (serve) {
 		require('devtron').install();
 		win.webContents.openDevTools();
-		win.setMenu(null);
+		// win.setMenu(null);
 
 		require('electron-reload')(__dirname, {
 			electron: require(`${__dirname}/node_modules/electron`)

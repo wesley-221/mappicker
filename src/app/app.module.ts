@@ -18,7 +18,18 @@ import { BodyComponent } from './components/main/body/body.component';
 import { BreadcrumbComponentComponent } from './components/main/breadcrumb-component/breadcrumb-component.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
-import { AuthInterceptor } from "./components/guards/token-interceptor";
+import { AuthInterceptor } from "./guards/token-interceptor";
+import { MappoolOverviewComponent } from './components/mappool/mappool-overview/mappool-overview.component';
+import { MappoolCreateComponent } from './components/mappool/mappool-create/mappool-create.component';
+import { LoggedInGuard } from './guards/logged-in-guard';
+import { AdministratorGuard } from './guards/administrator-guard';
+import { TournamentOverviewComponent } from './components/tournament/tournament-overview/tournament-overview.component';
+import { TournamentCreationComponent } from './components/tournament/tournament-creation/tournament-creation.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { UserPickerComponent } from './components/tournament/user-picker/user-picker.component';
+import { TournamentComponent } from './components/tournament/tournament/tournament.component';
+import { TournamentViewComponent } from './components/tournament/tournament-view/tournament-view.component';
+import { TournamentInterfaceComponent } from './components/tournament/tournament-interface/tournament-interface.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +40,16 @@ import { AuthInterceptor } from "./components/guards/token-interceptor";
 		BodyComponent,
 		BreadcrumbComponentComponent,
 		LoginComponent,
-		RegisterComponent
+		RegisterComponent,
+		MappoolOverviewComponent,
+		MappoolCreateComponent,
+		TournamentOverviewComponent,
+		TournamentCreationComponent,
+		SearchPipe,
+		UserPickerComponent,
+		TournamentComponent,
+		TournamentViewComponent,
+		TournamentInterfaceComponent
 	],
 	imports: [
 		BrowserModule,
@@ -42,7 +62,9 @@ import { AuthInterceptor } from "./components/guards/token-interceptor";
 		ReactiveFormsModule
 	],
 	providers: [
-		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+		LoggedInGuard,
+		AdministratorGuard
 	],
 	bootstrap: [AppComponent]
 })

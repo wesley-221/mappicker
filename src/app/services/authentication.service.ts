@@ -4,34 +4,22 @@ import { User } from '../models/user';
 import { Observable } from 'rxjs';
 import { UserRequest } from '../models/user-request';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import * as jwtDecode from "jwt-decode";
+import { StoreService } from './store.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 
 export class AuthenticationService {
-	public readonly cookieName: string = "auth";
+	public readonly authName: string = "auth";
 	private readonly apiUrl: string = environment.apiUrl;
 	public user: User;
 	public isLoggedIn: boolean;
+	public authToken: String;
 
-	constructor(private httpClient: HttpClient, private cookieService: CookieService) {
-		const authCookie: any = this.getCookie(this.cookieName);
-
-		if (authCookie !== "") {
-			const loggedInUser: User = new User(),
-				cookieValue = jwtDecode(authCookie);
-
-			loggedInUser.id = cookieValue.id;
-			loggedInUser.username = cookieValue.username;
-			loggedInUser.admin = cookieValue.admin;
-			loggedInUser.token = cookieValue;
-
-			this.user = loggedInUser;
-			this.isLoggedIn = true;
-		}
+	constructor(private httpClient: HttpClient, private storeService: StoreService) {
+		this.authToken = this.storeService.get(this.authName);
 	}
 
 	public isAdmin() {
@@ -61,7 +49,7 @@ export class AuthenticationService {
 		this.user = null;
 		this.isLoggedIn = false;
 
-		this.cookieService.delete(this.cookieName);
+		this.storeService.delete(this.authName);
 		return true;
 	}
 
@@ -73,19 +61,26 @@ export class AuthenticationService {
 	}
 
 	/**
-	 * Create a cookie
-	 * @param name the name of the cookie
-	 * @param value the value of the cookie
+	 * Cache the authentication token
+	 * @param name
 	 */
-	public setCookie(name: string, value: string): void {
-		this.cookieService.set(name, value, new Date().setDate(new Date().getDate() + 19), "/", environment.domain, false, "Strict");
+	public cacheAuthenticationToken(name: string) {
+		this.storeService.set(this.authName, name);
 	}
 
 	/**
-	 * Get the value of a cookie
-	 * @param name the name of the cookie
+	 * Delete the authentication token
 	 */
-	public getCookie(name: string): string {
-		return this.cookieService.get(name);
+	public deleteAuthenticationToken() {
+		this.storeService.delete(this.authName);
+		this.authToken = null;
+	}
+
+	/**
+	 * Validate the currently saved token
+	 * @param token
+	 */
+	public validateToken(token: String) {
+		return this.httpClient.get(`${this.apiUrl}validate-token`);
 	}
 }

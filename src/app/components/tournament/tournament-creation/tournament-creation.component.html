@@ -1,0 +1,19 @@
+<app-breadcrumb-component [menu]="[
+['tournament overview', '/tournament-overview'],
+['tournament creation']
+]"></app-breadcrumb-component>
+
+<h1>Tournament creation</h1>
+<hr />
+
+<app-tournament-interface [tournament]="tournament" [(tournamentForm)]="tournamentForm"></app-tournament-interface>
+
+<hr />
+<h3>Creating the tournament</h3>
+<p>Now that the tournament settings are set, you have to create the tournament before being able to add mappools for the tournament.</p>
+<button mat-flat-button color="primary" (click)="createTournament()">Create</button>
+
+<div id="tournamentCreatedAlert" class="alert alert-success" *ngIf="tournamentCreated == true">
+	<h3>Successfully created the tournament {{ tournament.tournamentName }}!</h3>
+	<a [routerLink]="['/tournament', tournament.id]">Click here</a> to check out your newly created tournament.
+</div>

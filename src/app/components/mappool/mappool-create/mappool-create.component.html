@@ -1,0 +1,37 @@
+<app-breadcrumb-component [menu]="[
+['mappool overview', '/'],
+['mappool creation']
+]"></app-breadcrumb-component>
+
+<h1>Mappool creation</h1>
+<hr />
+
+<form [formGroup]="mappoolForm">
+	<div class="row">
+		<div class="col">
+			<h3>Mappool name</h3>
+
+			<mat-form-field class="form-control">
+				<mat-label>Mappool name</mat-label>
+				<input matInput formControlName="mappool-name" />
+			</mat-form-field>
+
+			<p>The name of the mappool.</p>
+		</div>
+
+		<div class="col">
+			<h3>Default gamemode</h3>
+
+			<mat-form-field class="form-control">
+				<mat-label>Gamemode</mat-label>
+				<mat-select formControlName="mappool-gamemode">
+					<mat-option [value]="gamemode.id" *ngFor="let gamemode of allGamemodes">
+						{{ gamemode.name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<p>This will be the default gamemode for all the maps. This can be changed per map as well.</p>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,48 @@
+<form [formGroup]="tournamentForm">
+	<div class="row">
+		<div class="col">
+			<h3>Tournament name</h3>
+
+			<mat-form-field class="form-control">
+				<mat-label>Tournament name</mat-label>
+				<input matInput formControlName="tournament-name" />
+
+				<mat-error *ngIf="tournamentForm.get('tournament-name').invalid && (tournamentForm.get('tournament-name').dirty || tournamentForm.get('tournament-name').touched)">
+					This field is required.
+				</mat-error>
+			</mat-form-field>
+
+			<p>The name of the tournament.</p>
+		</div>
+
+		<div class="col">
+			<h3>Default gamemode</h3>
+
+			<mat-form-field class="form-control">
+				<mat-label>Gamemode</mat-label>
+				<mat-select formControlName="tournament-gamemode">
+					<mat-option [value]="gamemode.id" *ngFor="let gamemode of allGamemodes">
+						{{ gamemode.name }}
+					</mat-option>
+				</mat-select>
+
+				<mat-error *ngIf="tournamentForm.get('tournament-gamemode').invalid && (tournamentForm.get('tournament-gamemode').dirty || tournamentForm.get('tournament-gamemode').touched)">
+					This field is required.
+				</mat-error>
+			</mat-form-field>
+
+			<p>This will be the default gamemode for all the maps. This can be changed per map as well.</p>
+		</div>
+	</div>
+
+	<hr />
+
+	<h3>Mappickers</h3>
+	<p>Add a new user that is able to view this tournament and pick maps for it.</p>
+
+	<app-user-picker [selectedUsers]="tournament.mappickers"></app-user-picker>
+
+	<div class="alert alert-warning" *ngIf="tournament.mappickers.length == 0">
+		You haven't added any user to the mappickers. This tournament will only be available to you.
+	</div>
+</form>

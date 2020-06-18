@@ -1,0 +1,18 @@
+@import 'variables';
+
+.tournament {
+	padding: 8px;
+	margin-bottom: 3px;
+
+	border: 1px solid rgba(0,0,0,0.75);
+
+	-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+
+	&:hover {
+		cursor: pointer;
+
+		background-color: darken($tile-background-color, 5%);
+	}
+}

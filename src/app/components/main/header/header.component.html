@@ -5,11 +5,19 @@
 
 	<div class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">profile</div>
 
+	<div *ngIf="authService.isLoggedIn == true">
+		<div class="nav-link" [routerLink]="['/tournament-overview']" routerLinkActive="active">tournaments</div>
+	</div>
+
 	<button mat-icon-button class="mobile-nav" [matMenuTriggerFor]="navbarMenu">
 		<mat-icon>dehaze</mat-icon>
 	</button>
 
 	<mat-menu #navbarMenu="matMenu">
 		<button mat-menu-item [routerLink]="['/profile']">profile</button>
+
+		<div *ngIf="authService.isLoggedIn == true">
+			<button mat-menu-item [routerLink]="['/tournament-overview']">tournaments</button>
+		</div>
 	</mat-menu>
 </mat-toolbar>

@@ -1,0 +1,15 @@
+<app-breadcrumb-component [menu]="breadCrumbs"></app-breadcrumb-component>
+
+<div *ngIf="tournament">
+	<h1>{{ tournament.tournamentName }}</h1>
+	<hr />
+
+	<div class="background-area">
+		<div class="settings" *ngIf="tournament.createdBy.id == authService.user.id">
+			<h2>Settings</h2>
+			<hr />
+
+			<app-tournament-interface [tournament]="tournament" [tournamentForm]="tournamentForm"></app-tournament-interface>
+		</div>
+	</div>
+</div>

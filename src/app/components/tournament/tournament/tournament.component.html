@@ -1,0 +1,15 @@
+<div class="tournament" (click)="navigateToTournament(tournament)">
+	<h2>{{ tournament.tournamentName }}</h2>
+
+	<div class="mappickers">
+		<h4>Mappickers</h4>
+
+		<mat-chip-list>
+			<mat-chip *ngFor="let mappicker of tournament.mappickers">{{ mappicker.username }}</mat-chip>
+		</mat-chip-list>
+	</div>
+
+	<div class="mappools">
+
+	</div>
+</div>

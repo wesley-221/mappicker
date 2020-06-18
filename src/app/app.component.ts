@@ -18,7 +18,7 @@ export class AppComponent {
 				this.authService.isLoggedIn = true;
 			}
 			else {
-				this.authService.deleteAuthenticationToken();
+				this.authService.logout();
 			}
 		});
 	}

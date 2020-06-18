@@ -48,6 +48,7 @@ export class AuthenticationService {
 	public logout(): boolean {
 		this.user = null;
 		this.isLoggedIn = false;
+		this.authToken = null;
 
 		this.storeService.delete(this.authName);
 		return true;
@@ -66,14 +67,6 @@ export class AuthenticationService {
 	 */
 	public cacheAuthenticationToken(name: string) {
 		this.storeService.set(this.authName, name);
-	}
-
-	/**
-	 * Delete the authentication token
-	 */
-	public deleteAuthenticationToken() {
-		this.storeService.delete(this.authName);
-		this.authToken = null;
 	}
 
 	/**

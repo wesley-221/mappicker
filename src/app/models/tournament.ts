@@ -1,11 +1,13 @@
 import { Gamemodes } from "./misc-osu";
 import { User } from "./user";
+import { Mappool } from "./mappool/mappool";
 
 export class Tournament {
 	id: number;
 	tournamentName: String;
 	defaultGamemode: Gamemodes;
 	mappickers: User[] = [];
+	mappools: Mappool[] = [];
 	createdBy: User;
 
 	/**
@@ -14,6 +16,13 @@ export class Tournament {
 	 */
 	public isCreator(user: User) {
 		return this.createdBy.id == user.id;
+	}
+
+	/**
+	 * Get the amount of mappools in the tournament
+	 */
+	public mappoolCount() {
+		return this.mappools.length;
 	}
 
 	/**
@@ -33,6 +42,29 @@ export class Tournament {
 	}
 
 	/**
+	 * Add a mappool to the tournament
+	 * @param mappool the mappool to add to the tournament
+	 */
+	public addMappool(mappool: Mappool): void {
+		this.mappools.push(mappool);
+	}
+
+	/**
+	 * Remove a mappool from the tournament
+	 * @param mappool the mappool to remove from the tournament
+	 */
+	public removeMappool(mappool: Mappool): void {
+		this.mappools.splice(this.mappools.indexOf(mappool), 1);
+	}
+
+	/**
+	 * Get the image from the gamemode
+	 */
+	public getGamemodeImage() {
+		return `assets/images/gamemodes/mode-${this.defaultGamemode}.png`;
+	}
+
+	/**
 	 * Serialize the json to a tournament object
 	 * @param json
 	 */
@@ -45,6 +77,10 @@ export class Tournament {
 
 		for (let mappicker in json.mappickers) {
 			newTournament.addMappicker(User.serializeJson(json.mappickers[mappicker]));
+		}
+
+		for (let mappool in json.mappools) {
+			newTournament.addMappool(Mappool.serializeJson(json.mappools[mappool]));
 		}
 
 		newTournament.createdBy = User.serializeJson(json.createdBy);
@@ -65,6 +101,10 @@ export class Tournament {
 
 		for (let mappicker in tournament.mappickers) {
 			newTournament.addMappicker(User.makeTrueCopy(tournament.mappickers[mappicker]));
+		}
+
+		for (let mappool in tournament.mappools) {
+			newTournament.addMappool(Mappool.makeTrueCopy(tournament.mappools[mappool]));
 		}
 
 		newTournament.createdBy = User.makeTrueCopy(tournament.createdBy);

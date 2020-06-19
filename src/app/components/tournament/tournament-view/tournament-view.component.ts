@@ -11,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 	styleUrls: ['./tournament-view.component.scss']
 })
 export class TournamentViewComponent implements OnInit {
-	breadCrumbs: any = [['tournament overview', '/tournament-overview']];
+	breadCrumbs: any = [];
 	tournament: Tournament;
 	tournamentForm: FormGroup;
 
@@ -33,6 +33,9 @@ export class TournamentViewComponent implements OnInit {
 					const thisTournament = this.tournamentService.getTournamentById(params.id);
 					this.tournament = Tournament.makeTrueCopy(thisTournament);
 
+					this.breadCrumbs = [];
+
+					this.breadCrumbs.push(['tournament overview', '/tournament-overview']);
 					this.breadCrumbs.push([this.tournament.tournamentName])
 
 					this.tournamentForm.get('tournament-name').setValue(this.tournament.tournamentName);
@@ -52,6 +55,8 @@ export class TournamentViewComponent implements OnInit {
 			this.tournamentService.updateTournament(this.tournament).subscribe(response => {
 				this.tournament = Tournament.serializeJson(response);
 				this.tournamentUpdated = true;
+
+				this.tournamentService.importTournaments();
 
 				// Delay by a few miliseconds
 				setTimeout(() => {

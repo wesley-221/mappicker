@@ -1,4 +1,4 @@
-<app-breadcrumb-component [menu]="breadCrumbs"></app-breadcrumb-component>
+<app-breadcrumb-component [menu]="breadCrumbs" *ngIf="breadCrumbs.length >= 2"></app-breadcrumb-component>
 
 <div *ngIf="tournament">
 	<h1>{{ tournament.tournamentName }}</h1>
@@ -6,6 +6,17 @@
 
 	<div class="background-area">
 		<mat-tab-group mat-align-tabs="start" *ngIf="tournament.isCreator(authService.user)">
+			<mat-tab label="Mappools">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<hr />
+							<app-mappool-overview [tournament]="tournament"></app-mappool-overview>
+						</div>
+					</div>
+				</div>
+			</mat-tab>
+
 			<mat-tab label="Settings">
 				<div class="container-fluid">
 					<hr />
@@ -21,20 +32,10 @@
 					</div>
 				</div>
 			</mat-tab>
-
-			<mat-tab label="Second">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col">
-							<app-mappool-overview></app-mappool-overview>
-						</div>
-					</div>
-				</div>
-			</mat-tab>
 		</mat-tab-group>
 
 		<div *ngIf="!tournament.isCreator(authService.user)">
-			<app-mappool-overview></app-mappool-overview>
+			<app-mappool-overview [tournament]="tournament"></app-mappool-overview>
 		</div>
 	</div>
 </div>

@@ -7,15 +7,15 @@
 		</div>
 	</div>
 
+	<div class="general-information">
+		<img [src]="tournament.getGamemodeImage()" />
+	</div>
+
 	<div class="mappickers">
 		<h4>Mappickers</h4>
 
 		<mat-chip-list>
 			<mat-chip *ngFor="let mappicker of tournament.mappickers">{{ mappicker.username }}</mat-chip>
 		</mat-chip-list>
-	</div>
-
-	<div class="mappools">
-
 	</div>
 </div>

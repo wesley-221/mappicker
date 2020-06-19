@@ -1,0 +1,29 @@
+.mod-bracket {
+	border: 1px solid rgba(0,0,0,0.75);
+
+	-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+
+		padding: 8px;
+		margin-bottom: 3px;
+
+		.title, .buttons {
+			display: flex;
+			align-items: center;
+
+			h3 {
+				margin: 0 auto 0;
+			}
+		}
+	}
+
+	.body {
+		padding: 8px;
+		margin-bottom: 3px;
+	}
+}

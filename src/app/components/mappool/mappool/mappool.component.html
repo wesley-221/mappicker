@@ -1,0 +1,19 @@
+<div class="mappool" (click)="navigateMappool(mappool, $event)">
+	<div class="header">
+		<div class="title">
+			<h2>{{ mappool.mappoolName }}</h2>
+		</div>
+
+		<div class="buttons" *ngIf="tournament.isCreator(authService.user)">
+			<button mat-mini-fab color="warn"(click)="deleteMappool()"><mat-icon>delete</mat-icon></button>&nbsp;
+		</div>
+	</div>
+
+	<div class="body">
+		<h4>Mod brackets</h4>
+
+		<mat-chip-list>
+			<mat-chip *ngFor="let modBracket of mappool.modBrackets">{{ modBracket.modBracketName }}</mat-chip>
+		</mat-chip-list>
+	</div>
+</div>

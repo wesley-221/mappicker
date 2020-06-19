@@ -1,1 +1,10 @@
-<button [routerLink]="['/mappool-create']">Create</button>
+<h1>All mappools of {{ tournament.tournamentName }}</h1>
+<button mat-fab [routerLink]="['/mappool-create', tournament.id]"><mat-icon>add</mat-icon></button>
+
+<div class="alert alert-info" *ngIf="tournament.mappoolCount() <= 0">
+	There are no created mappools yet.
+</div>
+
+<div class="all-tournaments background-area" *ngIf="tournament.mappoolCount() > 0">
+	<app-mappool [mappool]="mappool" [tournament]="tournament" *ngFor="let mappool of tournament.mappools"></app-mappool>
+</div>

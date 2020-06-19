@@ -31,6 +31,9 @@ import { TournamentComponent } from './components/tournament/tournament/tourname
 import { TournamentViewComponent } from './components/tournament/tournament-view/tournament-view.component';
 import { TournamentInterfaceComponent } from './components/tournament/tournament-interface/tournament-interface.component';
 import { DeleteTournamentComponent } from './components/dialogs/delete-tournament/delete-tournament.component';
+import { ModBracketComponent } from './components/mappool/mod-bracket/mod-bracket.component';
+import { MappoolComponent } from './components/mappool/mappool/mappool.component';
+import { DeleteMappoolComponent } from './components/dialogs/delete-mappool/delete-mappool.component';
 
 @NgModule({
 	declarations: [
@@ -51,7 +54,10 @@ import { DeleteTournamentComponent } from './components/dialogs/delete-tournamen
 		TournamentComponent,
 		TournamentViewComponent,
 		TournamentInterfaceComponent,
-		DeleteTournamentComponent
+		DeleteTournamentComponent,
+		ModBracketComponent,
+		MappoolComponent,
+		DeleteMappoolComponent
 	],
 	imports: [
 		BrowserModule,

@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 const modules: any[] = [
@@ -29,7 +30,8 @@ const modules: any[] = [
 	MatSelectModule,
 	MatChipsModule,
 	MatTabsModule,
-	MatDialogModule
+	MatDialogModule,
+	MatSliderModule
 ];
 
 @NgModule({

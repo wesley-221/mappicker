@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { AuthenticationService } from '../services/authentication.service';
 import { Observable, of, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -11,8 +12,11 @@ export class AuthInterceptor implements HttpInterceptor {
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		const token: String = this.authService.authToken;
 
-		if (token) {
-			req = req.clone({ setHeaders: { Authorization: `${token}` }, withCredentials: true });
+		// Only send the token to the wyBin api
+		if (req.url.includes(environment.apiUrl)) {
+			if (token) {
+				req = req.clone({ setHeaders: { Authorization: `${token}` }, withCredentials: true });
+			}
 		}
 
 		return next.handle(req).pipe(catchError((error: HttpErrorResponse): Observable<any> => {

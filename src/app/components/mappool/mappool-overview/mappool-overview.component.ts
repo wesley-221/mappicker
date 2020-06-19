@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Tournament } from '../../../models/tournament';
 
 @Component({
 	selector: 'app-mappool-overview',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./mappool-overview.component.scss']
 })
 export class MappoolOverviewComponent implements OnInit {
+	@Input() tournament: Tournament;
+
 	constructor() { }
 	ngOnInit(): void { }
 }

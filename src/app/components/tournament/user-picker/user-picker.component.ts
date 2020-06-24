@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../../models/user';
+import { User } from '../../../models/authentication/user';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -15,17 +15,17 @@ export class UserPickerComponent implements OnInit {
 
 	constructor(private userService: UserService) {
 		userService.getUserList().subscribe(response => {
-			for(let item in response) {
+			for (let item in response) {
 				const user = User.serializeJson(response[item]);
 				let foundUser = false;
 
-				for(let mappicker in this.selectedUsers) {
-					if(user.id == this.selectedUsers[mappicker].id) {
+				for (let mappicker in this.selectedUsers) {
+					if (user.id == this.selectedUsers[mappicker].id) {
 						foundUser = true;
 					}
 				}
 
-				if(foundUser == false)
+				if (foundUser == false)
 					this.allUsers.push(user);
 			}
 		});

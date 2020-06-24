@@ -4,18 +4,28 @@ import { AuthenticationService } from '../services/authentication.service';
 import { Observable, of, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
+import { OsuService } from "../services/osu.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-	constructor(private authService: AuthenticationService) { }
+	constructor(private authService: AuthenticationService, private osuService: OsuService) { }
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const token: String = this.authService.authToken;
-
 		// Only send the token to the wyBin api
 		if (req.url.includes(environment.apiUrl)) {
+			const token: String = this.authService.authToken;
+
 			if (token) {
 				req = req.clone({ setHeaders: { Authorization: `${token}` }, withCredentials: true });
+			}
+		}
+
+		// Only send the token to the osu! api
+		if (req.url.includes(environment.osu.api_url)) {
+			const token: String = this.osuService.oauthToken;
+
+			if (token) {
+				req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` }, withCredentials: true });
 			}
 		}
 

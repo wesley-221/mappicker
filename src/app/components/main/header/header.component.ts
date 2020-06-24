@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { OsuService } from '../../../services/osu.service';
 
 @Component({
 	selector: 'app-header',
@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-	constructor(public authService: AuthenticationService) { }
+	constructor(public authService: AuthenticationService, public osuService: OsuService) { }
 
 	ngOnInit() { }
 }

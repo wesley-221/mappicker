@@ -1,50 +1,96 @@
 @import 'variables';
 
 .fixed-header {
+	display: flex;
+	justify-content: space-between;
+
 	position: fixed;
 	top: 0;
 	z-index: 9999;
-}
 
-.mobile-nav {
-	display: none;
-}
+	padding-right: 0;
 
-.brand {
-	color: white;
-	outline: 0;
+	.left-menu {
+		display: flex;
 
-	&:hover {
-		cursor: pointer;
+		.brand {
+			color: white;
+			outline: 0;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		.nav-link {
+			margin: 0 8px;
+			color: white;
+			font-size: .75em;
+
+			outline: 0;
+
+			&.active {
+				color: $primary;
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
 	}
-}
 
-.nav-link {
-	margin: 0 8px;
-	color: white;
-	font-size: .75em;
+	.right-menu {
+		height: inherit;
 
-	outline: 0;
+		.osu-login {
+			display: flex;
+			height: inherit;
 
-	&.active {
-		color: $primary;
-	}
+			align-items: center;
 
-	&:hover {
-		cursor: pointer;
+			padding-right: 8px;
+
+			.logo {
+				height: inherit;
+
+				img {
+					height: inherit;
+					padding: 8px;
+				}
+			}
+
+			&:hover {
+				background-color: $background-color;
+				cursor: pointer;
+			}
+		}
+
+		.mobile-nav {
+			display: none;
+		}
 	}
 }
 
 @media only screen and (max-width: 768px) {
-	.nav-link {
-		display: none;
-	}
+	.fixed-header {
+		.left-menu {
+			.nav-link {
+				display: none;
+			}
 
-	.mobile-nav {
-		display: block;
-	}
+			.nav-spacing {
+				flex: 1 1 auto;
+			}
+		}
 
-	.nav-spacing {
-		flex: 1 1 auto;
+		.right-menu {
+			.osu-login {
+				display: none;
+			}
+
+			.mobile-nav {
+				display: block;
+			}
+		}
 	}
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserRequest } from '../../../models/user-request';
+import { UserRequest } from '../../../models/authentication/user-request';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
-import { User } from '../../../models/user';
+import { User } from '../../../models/authentication/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TournamentService } from '../../../services/tournament.service';
+import { OsuService } from '../../../services/osu.service';
+import { EndpointMe } from '../../../models/osu-api/endpoint-me';
 
 @Component({
 	selector: 'app-login',
@@ -16,7 +18,9 @@ export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	error: String = null;
 
-	constructor(public authService: AuthenticationService, private route: Router, private tournamentService: TournamentService) {
+	isAuthenticating: boolean = false;
+
+	constructor(public authService: AuthenticationService, private route: Router, private tournamentService: TournamentService, public osuService: OsuService) {
 		this.loginForm = new FormGroup({
 			'username': new FormControl('', [
 				Validators.required
@@ -63,5 +67,31 @@ export class LoginComponent implements OnInit {
 	logout() {
 		this.authService.logout();
 		this.tournamentService.importTournaments();
+	}
+
+	osuLogin() {
+		this.isAuthenticating = true;
+
+		this.osuService.startOsuOauthProcess().subscribe(token => {
+			if (token != null) {
+				this.osuService.cacheOsuOauthToken(token);
+
+				this.osuService.getMeData().subscribe(me => {
+					const osuUser: EndpointMe = EndpointMe.serializeJson(me);
+
+					this.osuService.authenticatedUser = osuUser;
+					this.osuService.cacheAuthenticatedUser(osuUser);
+
+					this.isAuthenticating = false;
+				});
+			}
+			else {
+				this.isAuthenticating = false;
+			}
+		});
+	}
+
+	osuLogout() {
+		this.osuService.logout();
 	}
 }

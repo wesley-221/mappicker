@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AllGamemodes } from '../../../models/misc-osu';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Tournament } from '../../../models/tournament';
-import { User } from '../../../models/user';
+import { User } from '../../../models/authentication/user';
 import { UserService } from '../../../services/user.service';
 import { TournamentService } from '../../../services/tournament.service';
 

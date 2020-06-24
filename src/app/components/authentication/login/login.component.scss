@@ -3,64 +3,131 @@
 $sidebar-logo-width: 150px;
 
 .login-container {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 
-    .login {
-        width: 400px;
+	.login {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 
-        padding: 18px;
+		width: 400px;
 
-        background-color: $tile-background-color;
-        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+		padding: 18px;
+		margin: 18px;
 
-        .header {
-            display: flex;
-            justify-content: center;
+		background-color: $tile-background-color;
+		-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
 
-            .header-image {
-                width:              $sidebar-logo-width;
-                height:             $sidebar-logo-width;
-                line-height:        $sidebar-logo-width;
+		.header {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-                margin-bottom:      8px;
-                border-radius:      50%;
+			flex-direction: column;
 
-                background-repeat:  no-repeat;
-                background-size:    cover;
-                background-image:   url("~/assets/images/icon.png");
-            }
-        }
+			.header-image {
+				width: $sidebar-logo-width;
+				height: $sidebar-logo-width;
+				line-height: $sidebar-logo-width;
 
-        .title {
-            margin-bottom: 16px;
-            text-align: center;
-        }
+				margin-bottom: 8px;
+				border-radius: 50%;
 
-        .body {
-            .spacing {
-                margin-top: 18px;
-            }
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-image: url("~/assets/images/icon.png");
 
-            .center-text {
-                text-align: center;
-            }
+				&.osu-logo {
+					background-image: url("~/assets/images/osulogo.png");
+				}
+			}
 
-            .center {
-                display: flex;
-                justify-content: center;
+			.link {
+				margin-bottom: 8px;
+			}
+		}
 
-                .custom-btn {
-                    padding-left: 48px;
-                    padding-right: 48px;
+		.body {
+			.spacing {
+				margin-top: 18px;
+			}
 
-                    border-radius: 50px;
-                }
-            }
-        }
-    }
+			.center-text {
+				text-align: center;
+			}
+
+			.center {
+				display: flex;
+				justify-content: center;
+
+				.custom-btn {
+					padding-left: 48px;
+					padding-right: 48px;
+
+					border-radius: 50px;
+				}
+			}
+		}
+	}
+
+	.osu-login {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		width: 400px;
+
+		padding: 18px;
+		margin: 18px;
+
+		background-color: $tile-background-color;
+		-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+
+		.header {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			flex-direction: column;
+
+			.header-image {
+				width: $sidebar-logo-width;
+				height: $sidebar-logo-width;
+				line-height: $sidebar-logo-width;
+
+				margin-bottom: 8px;
+				border-radius: 50%;
+
+				&.osu-logo {
+					background-repeat: no-repeat;
+					background-size: cover;
+
+					background-image: url("~/assets/images/osulogo.png");
+				}
+			}
+
+			.authentication-message {
+				display: flex;
+
+				.spinner-container {
+					display: flex;
+					align-items: center;
+
+					margin-right: 8px;
+				}
+			}
+		}
+
+		.body {
+			display: flex;
+			justify-content: center;
+		}
+	}
 }
 
 .alert-area {

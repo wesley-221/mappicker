@@ -2,11 +2,14 @@
 	<div class="login">
 		<div class="header">
 			<div class="header-image"></div>
-		</div>
 
-		<div class="title">
-			Login <br />
-			<a [routerLink]="['/register']">No account yet? Click here</a>
+			<div class="title">
+				Login
+			</div>
+
+			<div class="link">
+				<a [routerLink]="['/register']">No account yet? Click here</a>
+			</div>
 		</div>
 
 		<div class="body">
@@ -39,6 +42,44 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="osu-login" *ngIf="!osuService.authenticatedUser">
+		<div class="header">
+			<div class="header-image osu-logo"></div>
+
+			<div class="title">
+				Login to osu!
+			</div>
+
+			<div class="alert alert-info authentication-message" *ngIf="isAuthenticating == true">
+				<div class="spinner-container">
+					<mat-spinner [diameter]="32" class="spinner"></mat-spinner>
+				</div>
+
+				<div class="text">
+					<p>Attempting to login, hold on tight!</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="body">
+			<button (click)="osuLogin()" mat-raised-button color="primary">Login</button>
+		</div>
+	</div>
+
+	<div class="osu-login" *ngIf="osuService.authenticatedUser">
+		<div class="header">
+			<img class="header-image" [src]="osuService.authenticatedUser.avatar_url" />
+
+			<div class="title">
+				Logged in as <b>{{ osuService.authenticatedUser.username }}</b>
+			</div>
+		</div>
+
+		<div class="body">
+			<button (click)="osuLogout()" mat-raised-button color="primary">Logout</button>
 		</div>
 	</div>
 </div>

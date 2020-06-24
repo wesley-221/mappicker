@@ -1,5 +1,10 @@
 export const environment = {
 	production: true,
 	apiUrl: "https://wybin.xyz:8080/",
-	domain: "wybin.xyz"
+	domain: "wybin.xyz",
+	osu: {
+		"client_id": 1614,
+		"redirect_uri": "http://localhost:4200/oauth",
+		"api_url": "https://osu.ppy.sh/api/v2/"
+	}
 };

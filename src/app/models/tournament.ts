@@ -1,5 +1,5 @@
 import { Gamemodes } from "./misc-osu";
-import { User } from "./user";
+import { User } from "./authentication/user";
 import { Mappool } from "./mappool/mappool";
 
 export class Tournament {

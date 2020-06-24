@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { User } from '../models/user';
+import { User } from '../models/authentication/user';
 import { Observable } from 'rxjs';
-import { UserRequest } from '../models/user-request';
+import { UserRequest } from '../models/authentication/user-request';
 import { HttpClient } from '@angular/common/http';
-import * as jwtDecode from "jwt-decode";
 import { StoreService } from './store.service';
 
 @Injectable({

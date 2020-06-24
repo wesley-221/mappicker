@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserRequest } from '../../../models/user-request';
+import { UserRequest } from '../../../models/authentication/user-request';
 
 @Component({
 	selector: 'app-register',

@@ -6,7 +6,7 @@ let win: BrowserWindow = null;
 const args = process.argv.slice(1),
 	serve = args.some(val => val === '--serve');
 
-function createWindow(): BrowserWindow {
+function createMainWindow(): BrowserWindow {
 	const electronScreen = screen;
 	const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
@@ -19,6 +19,7 @@ function createWindow(): BrowserWindow {
 		webPreferences: {
 			nodeIntegration: true,
 			allowRunningInsecureContent: (serve) ? true : false,
+			webSecurity: false
 		},
 		icon: `${__dirname}/src/assets/images/icon.png`
 	});
@@ -51,7 +52,7 @@ function createWindow(): BrowserWindow {
 try {
 	app.allowRendererProcessReuse = true;
 
-	app.on('ready', () => setTimeout(createWindow, 400));
+	app.on('ready', () => setTimeout(createMainWindow, 400));
 
 	app.on('window-all-closed', () => {
 		if (process.platform !== 'darwin') {
@@ -61,7 +62,7 @@ try {
 
 	app.on('activate', () => {
 		if (win === null) {
-			createWindow();
+			createMainWindow();
 		}
 	});
 

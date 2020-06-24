@@ -1,23 +1,41 @@
 <mat-toolbar class="fixed-header">
-	<h2 class="brand" [routerLink]="['/']">wyPicker</h2>
+	<div class="left-menu">
+		<h2 class="brand" [routerLink]="['/']">wyPicker</h2>
 
-	<span class="nav-spacing"></span>
+		<span class="nav-spacing"></span>
 
-	<div class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">profile</div>
-
-	<div *ngIf="authService.isLoggedIn == true">
-		<div class="nav-link" [routerLink]="['/tournament-overview']" routerLinkActive="active">tournaments</div>
-	</div>
-
-	<button mat-icon-button class="mobile-nav" [matMenuTriggerFor]="navbarMenu">
-		<mat-icon>dehaze</mat-icon>
-	</button>
-
-	<mat-menu #navbarMenu="matMenu">
-		<button mat-menu-item [routerLink]="['/profile']">profile</button>
+		<div class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">profile</div>
 
 		<div *ngIf="authService.isLoggedIn == true">
-			<button mat-menu-item [routerLink]="['/tournament-overview']">tournaments</button>
+			<div class="nav-link" [routerLink]="['/tournament-overview']" routerLinkActive="active">tournaments</div>
 		</div>
-	</mat-menu>
+	</div>
+
+	<div class="right-menu">
+		<div class="osu-login" [matMenuTriggerFor]="osuMenu" *ngIf="osuService.authenticatedUser">
+			<div class="logo">
+				<img [src]="osuService.authenticatedUser.avatar_url" />
+			</div>
+
+			<div class="username">
+				{{ osuService.authenticatedUser.username }}
+			</div>
+		</div>
+
+		<mat-menu #osuMenu="matMenu">
+			<button mat-menu-item (click)="osuService.logout()">logout</button>
+		</mat-menu>
+
+		<button mat-icon-button class="mobile-nav" [matMenuTriggerFor]="navbarMenu">
+			<mat-icon>dehaze</mat-icon>
+		</button>
+
+		<mat-menu #navbarMenu="matMenu">
+			<button mat-menu-item [routerLink]="['/profile']">profile</button>
+
+			<div *ngIf="authService.isLoggedIn == true">
+				<button mat-menu-item [routerLink]="['/tournament-overview']">tournaments</button>
+			</div>
+		</mat-menu>
+	</div>
 </mat-toolbar>

@@ -1,0 +1,16 @@
+<div *ngFor="let alert of alerts" (click)="removeAlert(alert)" class="alert"
+	[ngClass]="{'alert-info': alert.type == alertTypes.Info,
+				'alert-success': alert.type == alertTypes.Success,
+				'alert-warning': alert.type == alertTypes.Warning,
+				'alert-error': alert.type == alertTypes.Error}">
+	<div class="alert-content">
+		<div class="alert-icon">
+			<mat-icon *ngIf="alert.type == alertTypes.Info">info</mat-icon>
+			<mat-icon *ngIf="alert.type == alertTypes.Success">check_circle</mat-icon>
+			<mat-icon *ngIf="alert.type == alertTypes.Warning">warning</mat-icon>
+			<mat-icon *ngIf="alert.type == alertTypes.Error">error</mat-icon>
+		</div>
+
+		<div class="alert-message" [innerHTML]="alert.message"></div>
+	</div>
+</div>

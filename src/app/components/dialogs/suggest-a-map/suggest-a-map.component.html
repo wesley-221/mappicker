@@ -1,0 +1,123 @@
+<h2 mat-dialog-title>Suggest a map</h2>
+
+<mat-dialog-content>
+	<div class="suggest-map">
+		<div class="text form-control">
+			<mat-form-field class="form-control">
+				<mat-label>Beatmap url</mat-label>
+				<input matInput [(ngModel)]="beatmapLink" />
+			</mat-form-field>
+		</div>
+
+		<div class="button">
+			<button mat-mini-fab (click)="getMapData()">
+				<mat-icon>cached</mat-icon>
+			</button>
+		</div>
+	</div>
+
+	<div class="alert alert-info" *ngIf="foundBeatmap == null">
+		You haven't picked a map yet.
+	</div>
+
+	<div class="alert alert-warning alert-no-margin-top" *ngIf="foundBeatmap != null">
+		<b>Disclaimer</b>: The star rating currently only works for osu!, all the other gamemodes aren't supported yet
+		by the osu! api.
+	</div>
+
+	<div class="alert alert-danger alert-smaller-padding" *ngIf="mapIsSuggestedString != null" [innerHTML]="mapIsSuggestedString"></div>
+
+	<div class="beatmap background-area" *ngIf="foundBeatmap != null">
+		<div class="beatmap-cover"
+			[ngStyle]="{ 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(' + foundBeatmap.beatmapset.getBeatmapsetCover() + ')' }">
+			<div class="beatmap-name">
+				{{ foundBeatmap.getFullBeatmapName() }}
+			</div>
+
+			<div class="map-stats">
+				<div class="generic">
+					<div class="gamemode">{{ foundBeatmap.mode }}</div>
+					<div class="beatmap-status">{{ foundBeatmap.status }}</div>
+					<!-- TODO: add this once you can actually pass a gamemode to the api call -->
+					<!-- <div class="convert-status">{{ (foundBeatmap.convert == false) ? 'specific' : 'convert' }}</div> -->
+				</div>
+
+				<div class="map-specific">
+					<div class="stat-category">
+						<div class="stat-row">
+							<div class="star-rating">
+								<mat-icon>star_rate</mat-icon>&nbsp;{{ foundBeatmap.difficulty_rating }}
+							</div>
+							<div class="length">
+								<mat-icon>access_time</mat-icon>
+								&nbsp;{{ foundBeatmap.total_length * 1000 | date: 'mm:ss' }}
+							</div>
+							<div class="bpm">
+								<mat-icon>speed</mat-icon>&nbsp;{{ foundBeatmap.bpm }}
+							</div>
+						</div>
+					</div>
+
+					<div class="stat-category">
+						<div class="stat-row">
+							<div class="text">Circle size</div>
+							<div class="value">{{ foundBeatmap.cs }}</div>
+						</div>
+
+						<div class="stat-row">
+							<div class="text">HP drain</div>
+							<div class="value">{{ foundBeatmap.drain }}</div>
+						</div>
+
+						<div class="stat-row">
+							<div class="text">Overall difficulty</div>
+							<div class="value">{{ foundBeatmap.accuracy }}</div>
+						</div>
+
+						<div class="stat-row">
+							<div class="text">Approach rate</div>
+							<div class="value">{{ foundBeatmap.ar }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row" *ngIf="foundBeatmap != null">
+		<div class="col">
+			<h2>Mappool</h2>
+
+			<mat-form-field class="form-control">
+				<mat-label>Mappool</mat-label>
+
+				<mat-select [(ngModel)]="selectedMappoolId" (selectionChange)="onMappoolChange()">
+					<mat-option *ngFor="let mappool of selectedTournament.mappools" [value]="mappool.id">{{ mappool.mappoolName }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<p>Select the mappool that you want to suggest this beatmap for.</p>
+		</div>
+
+		<div class="col" *ngIf="selectedMappool != null">
+			<h2>Modbrackets</h2>
+
+			<mat-form-field class="form-control">
+				<mat-label>Modbracket(s)</mat-label>
+
+				<mat-select multiple [(ngModel)]="selectedModBracketIds" (selectionChange)="onModBracketChange()">
+					<mat-option *ngFor="let modBracket of selectedMappool.modBrackets" [value]="modBracket.id">{{ modBracket.modBracketName }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<p>Select the modbracket(s) that you want to suggest this beatmap for.</p>
+		</div>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button mat-raised-button [mat-dialog-close]="null">Cancel</button>
+	<button mat-raised-button [mat-dialog-close]="returnSuggestedMap()" color="primary" [disabled]="selectedModBrackets == null || selectedModBrackets.length <= 0">Suggest</button>
+</mat-dialog-actions>

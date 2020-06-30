@@ -3,7 +3,7 @@
 ]"></app-breadcrumb-component>
 
 <h1>All your tournaments</h1>
-<button mat-fab [routerLink]="['/tournament-create']"><mat-icon>add</mat-icon></button>
+<button mat-raised-button [routerLink]="['/tournament-create']" color="primary"><mat-icon>add</mat-icon> create new tournament</button>
 
 <div class="alert alert-info" *ngIf="tournamentService.getTournamentCount() <= 0">
 	You don't have any tournaments available.

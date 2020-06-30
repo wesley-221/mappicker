@@ -34,6 +34,7 @@ import { DeleteTournamentComponent } from './components/dialogs/delete-tournamen
 import { ModBracketComponent } from './components/mappool/mod-bracket/mod-bracket.component';
 import { MappoolComponent } from './components/mappool/mappool/mappool.component';
 import { DeleteMappoolComponent } from './components/dialogs/delete-mappool/delete-mappool.component';
+import { SuggestAMapComponent } from './components/dialogs/suggest-a-map/suggest-a-map.component';
 import { AlertComponent } from './components/main/alert/alert.component';
 
 @NgModule({
@@ -59,6 +60,7 @@ import { AlertComponent } from './components/main/alert/alert.component';
 		ModBracketComponent,
 		MappoolComponent,
 		DeleteMappoolComponent,
+		SuggestAMapComponent,
 		AlertComponent
 	],
 	imports: [

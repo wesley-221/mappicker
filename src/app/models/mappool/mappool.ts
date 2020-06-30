@@ -7,6 +7,22 @@ export class Mappool {
 	modBrackets: ModBracket[] = [];
 
 	/**
+	 * Get all mod brackets from the given ids
+	 * @param modBracketIds
+	 */
+	public getModBracketsByIds(modBracketIds: number[]): ModBracket[] {
+		let modBrackets: ModBracket[] = [];
+
+		for (let modBracket in this.modBrackets) {
+			if (modBracketIds.indexOf(this.modBrackets[modBracket].id) > -1) {
+				modBrackets.push(this.modBrackets[modBracket]);
+			}
+		}
+
+		return modBrackets;
+	}
+
+	/**
 	 * Add a modbracket to the mappool
 	 * @param modBracket the modbracket to add
 	 */

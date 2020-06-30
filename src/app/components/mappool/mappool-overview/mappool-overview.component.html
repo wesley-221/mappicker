@@ -1,5 +1,8 @@
 <h1>All mappools of {{ tournament.tournamentName }}</h1>
-<button mat-fab [routerLink]="['/mappool-create', tournament.id]"><mat-icon>add</mat-icon></button>
+<div class="create-buttons">
+	<button mat-raised-button [routerLink]="['/mappool-create', tournament.id]" color="primary"><mat-icon>add</mat-icon> create new mappool</button>
+	<button mat-raised-button (click)="suggestMap(tournament)" color="primary"><mat-icon>add</mat-icon> suggest a map</button>
+</div>
 
 <div class="alert alert-info" *ngIf="tournament.mappoolCount() <= 0">
 	There are no created mappools yet.

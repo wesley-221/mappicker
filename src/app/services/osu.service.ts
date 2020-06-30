@@ -23,6 +23,7 @@ export class OsuService {
 	public authenticatedUser: EndpointMe;
 
 	public readonly ME_ENDPOINT: EndpointOsu = new EndpointOsu('me', null, EndpointMe);
+	public readonly BEATMAP_ENDPOINT: EndpointOsu = new EndpointOsu('beatmaps', null, null);
 
 	constructor(private electronService: ElectronService, private httpClient: HttpClient, private storeService: StoreService) {
 		this.oauthResponse$ = new BehaviorSubject(null);
@@ -41,7 +42,7 @@ export class OsuService {
 			// The token has expired
 			// TODO: auto refresh token when its expired, opt-in?
 			if (currentDate > tokenExpireDate) {
-				this.logout();
+				// this.logout();
 			}
 			else {
 				const authenticatedUser = this.storeService.get(this.STORE_AUTHENTICATED_USER);
@@ -152,5 +153,13 @@ export class OsuService {
 	 */
 	public getMeData(): Observable<EndpointMe> {
 		return this.httpClient.get<EndpointMe>(this.ME_ENDPOINT.endpointUrl);
+	}
+
+	/**
+	 * Get the beatmap data from the given beatmapid
+	 * @param beatmapId
+	 */
+	public getBeatmapData(beatmapId: number): Observable<any> {
+		return this.httpClient.get<any>(`${this.BEATMAP_ENDPOINT.endpointUrl}/${beatmapId}`);
 	}
 }

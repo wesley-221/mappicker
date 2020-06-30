@@ -42,7 +42,7 @@
 
 	<hr />
 	<h3>Mod brackets</h3>
-	<button mat-fab (click)="addNewModBracket()"><mat-icon>add</mat-icon></button>
+	<button mat-raised-button (click)="addNewModBracket()" color="primary"><mat-icon>add</mat-icon> add new modbracket</button>
 
 	<div class="alert alert-warning" *ngIf="mappool.modBracketCount() <= 0">
 		You haven't created any mod brackets yet.

@@ -3,7 +3,7 @@ import { Mods } from "../misc-osu";
 export class ModBracket {
 	id: number;
 	index: number;
-	modBracketName: String = "Unnamed mod bracket";
+	modBracketName: string = "Unnamed mod bracket";
 	mods: Mods[];
 	mapsRequired: number = 1;
 

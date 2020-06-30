@@ -11,6 +11,20 @@ export class Tournament {
 	createdBy: User;
 
 	/**
+	 * Get a mappool by the given id
+	 * @param mappoolId
+	 */
+	public getMappoolById(mappoolId: number): Mappool {
+		for (let mappool in this.mappools) {
+			if (this.mappools[mappool].id == mappoolId) {
+				return this.mappools[mappool];
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Check if the given user is the creator of the tournament
 	 * @param user the user to check
 	 */

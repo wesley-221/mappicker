@@ -1,0 +1,80 @@
+@import 'variables';
+
+.alert-no-margin-top {
+	margin-top: 0;
+}
+
+.alert-smaller-padding {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+
+.suggest-map {
+	display: flex;
+
+	.text {
+		margin-right: 16px;
+	}
+}
+
+.beatmap {
+	.beatmap-cover {
+		background-position: center;
+		background-size: cover;
+
+		overflow: hidden;
+
+		.beatmap-name {
+			text-align: center;
+			font-size: 18px;
+
+			padding: 8px;
+		}
+
+		.map-stats {
+			display: flex;
+			justify-content: space-between;
+
+			.generic {
+				.gamemode, .beatmap-status, .convert-status {
+					border-radius: 100px 100px 100px 100px;
+					background-color: #{$background-color}AA;
+
+					padding: 8px 30px 8px 30px;
+					margin: 8px;
+
+					text-align: center;
+				}
+			}
+
+			.map-specific {
+				width: 25%;
+				margin: 8px;
+
+				.stat-category {
+					margin-bottom: 4px;
+
+					background-color: #{$background-color}99;
+
+					.stat-row {
+						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
+
+						padding: 8px;
+
+						div {
+							display: flex;
+							align-items: center;
+						}
+					}
+
+					&:last-child {
+						margin-bottom: 0px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -84,8 +84,6 @@ export class MappoolCreateComponent implements OnInit {
 
 			this.tournament.addMappool(this.mappool);
 
-			console.log(this.tournament)
-
 			this.tournamentService.createTournament(this.tournament).subscribe(response => {
 				this.tournament = Tournament.serializeJson(response);
 				this.tournamentService.importTournaments();

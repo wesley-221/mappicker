@@ -12,6 +12,19 @@ export class SuggestedMap {
 	submittedBy: User;
 
 	/**
+	 * Get all the modbracket names seperated by a comma
+	 */
+	public getModBracketNames() {
+		let modBrackets: string[] = [];
+
+		for (let modBracket in this.modBrackets) {
+			modBrackets.push(this.modBrackets[modBracket].modBracketName);
+		}
+
+		return modBrackets.join(', ');
+	}
+
+	/**
 	 * Serialize the json to a suggestedmap object
 	 * @param json
 	 */

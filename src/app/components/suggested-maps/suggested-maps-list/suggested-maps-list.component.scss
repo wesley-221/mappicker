@@ -1,0 +1,60 @@
+.scroller {
+	overflow-y: auto;
+	max-height: 600px;
+}
+
+.beatmap-suggestion {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	margin: 0;
+	padding: 8px;
+	margin-bottom: 3px;
+
+	border: 1px solid rgba(0,0,0,0.75);
+
+	-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+
+	.beatmap-column {
+		display: flex;
+		flex-basis: 100%;
+		flex: 8;
+
+		padding: 8px;
+
+		&.small {
+			flex: 1;
+		}
+
+		a {
+			cursor: pointer;
+		}
+
+		&.right-align {
+			justify-content: flex-end;
+		}
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.filters {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	margin-top: 8px;
+
+	.filter {
+		display: flex;
+		flex-basis: 100%;
+		flex: 1;
+
+		padding: 8px;
+	}
+}

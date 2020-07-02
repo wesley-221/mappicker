@@ -36,6 +36,9 @@ import { MappoolComponent } from './components/mappool/mappool/mappool.component
 import { DeleteMappoolComponent } from './components/dialogs/delete-mappool/delete-mappool.component';
 import { SuggestAMapComponent } from './components/dialogs/suggest-a-map/suggest-a-map.component';
 import { AlertComponent } from './components/main/alert/alert.component';
+import { SuggestedMapsListComponent } from './components/suggested-maps/suggested-maps-list/suggested-maps-list.component';
+import { DeleteSuggestedMapComponent } from './components/dialogs/delete-suggested-map/delete-suggested-map.component';
+import { FilterSuggestedMapsPipe } from './pipes/filter-suggested-maps.pipe';
 
 @NgModule({
 	declarations: [
@@ -61,7 +64,10 @@ import { AlertComponent } from './components/main/alert/alert.component';
 		MappoolComponent,
 		DeleteMappoolComponent,
 		SuggestAMapComponent,
-		AlertComponent
+		AlertComponent,
+		SuggestedMapsListComponent,
+		DeleteSuggestedMapComponent,
+		FilterSuggestedMapsPipe
 	],
 	imports: [
 		BrowserModule,

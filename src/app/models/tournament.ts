@@ -25,6 +25,23 @@ export class Tournament {
 	}
 
 	/**
+	 * Get all modbracket names
+	 */
+	public getAllModBrackets(): string[] {
+		let allModBrackets: string[] = [];
+
+		for (let mappool in this.mappools) {
+			for (let modBracket in this.mappools[mappool].modBrackets) {
+				if (allModBrackets.indexOf(this.mappools[mappool].modBrackets[modBracket].modBracketName) == -1) {
+					allModBrackets.push(this.mappools[mappool].modBrackets[modBracket].modBracketName);
+				}
+			}
+		}
+
+		return allModBrackets;
+	}
+
+	/**
 	 * Check if the given user is the creator of the tournament
 	 * @param user the user to check
 	 */

@@ -1,0 +1,75 @@
+<div class="filters">
+	<div class="filter">
+		<mat-form-field class="form-control">
+			<mat-label>Filter by text</mat-label>
+			<input matInput [(ngModel)]="filterByText" />
+		</mat-form-field>
+
+		<button mat-icon-button color="warn" (click)="clear(1)"><mat-icon>clear</mat-icon></button>
+	</div>
+
+	<div class="filter">
+		<mat-form-field class="form-control">
+			<mat-label>Filter by mappool</mat-label>
+
+			<mat-select multiple [(ngModel)]="filterByMappool" (selectionChange)="triggerPipe()">
+				<mat-option *ngFor="let mappool of tournament.mappools" [value]="mappool.mappoolName">{{ mappool.mappoolName }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<button mat-icon-button color="warn" (click)="clear(2)"><mat-icon>clear</mat-icon></button>
+	</div>
+
+	<div class="filter">
+		<mat-form-field class="form-control">
+			<mat-label>Filter by mods</mat-label>
+
+			<mat-select multiple [(ngModel)]="filterByMods" (selectionChange)="triggerPipe()">
+				<mat-option *ngFor="let modBracketName of tournament.getAllModBrackets()" [value]="modBracketName">{{ modBracketName }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<button mat-icon-button color="warn" (click)="clear(3)"><mat-icon>clear</mat-icon></button>
+	</div>
+
+	<div class="filter">
+		<mat-form-field class="form-control">
+			<mat-label>Filter by mappicker</mat-label>
+
+			<mat-select multiple [(ngModel)]="filterByMappicker" (selectionChange)="triggerPipe()">
+				<mat-option *ngFor="let mappicker of tournament.mappickers" [value]="mappicker.username">{{ mappicker.username }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<button mat-icon-button color="warn" (click)="clear(4)"><mat-icon>clear</mat-icon></button>
+	</div>
+</div>
+
+<div class="background-area scroller">
+	<div class="beatmap-suggestion" *ngFor="let suggestedMap of ( allSuggestedMaps | filterSuggestedMaps : filterByText : filterByMappool : filterByMods : filterByMappicker )">
+		<div class="beatmap-column">
+			<!-- TODO: make the link with beatmapsetid/gamemode/beatmapid -->
+			<a [href]="" (click)="electronService.openLink(suggestedMap.beatmap.url)">{{ suggestedMap.beatmap.getFullBeatmapName() }}</a>
+		</div>
+
+		<div class="beatmap-column small">
+			{{ suggestedMap.mappool.mappoolName }}
+		</div>
+
+		<div class="beatmap-column small">
+			{{ suggestedMap.getModBracketNames() }}
+		</div>
+
+		<div class="beatmap-column small">
+			{{ suggestedMap.submittedBy.username }}
+		</div>
+
+		<div class="beatmap-column small right-align">
+			<button mat-mini-fab color="warn" (click)="deleteSuggestedMap(suggestedMap)"><mat-icon>delete</mat-icon></button>
+		</div>
+	</div>
+
+	<div class="alert alert-info" *ngIf="( allSuggestedMaps | filterSuggestedMaps : filterByText : filterByMappool : filterByMods : filterByMappicker ).length == 0">
+		Couldn&apos;t find any suggested maps with the current selected filters.
+	</div>
+</div>

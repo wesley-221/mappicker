@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { SuggestedMap } from '../models/mappool/suggested-map';
+import { Tournament } from '../models/tournament';
 
 @Injectable({
 	providedIn: 'root'
@@ -25,5 +26,21 @@ export class MappoolService {
 	 */
 	public isMapSuggested(suggestedMap: SuggestedMap) {
 		return this.httpClient.post<SuggestedMap>(`${this.apiUrl}wypicker/is-suggested`, suggestedMap);
+	}
+
+	/**
+	 * Get all suggested maps from the given tournament
+	 * @param tournamentId
+	 */
+	public getAllSuggestedMapsFromTournament(tournament: Tournament) {
+		return this.httpClient.get<SuggestedMap[]>(`${this.apiUrl}wypicker/get-all-suggested-maps-from-tournament/${tournament.id}`);
+	}
+
+	/**
+	 * Delete a suggested map
+	 * @param suggestedMap
+	 */
+	public deleteSuggestedMap(suggestedMap: SuggestedMap) {
+		return this.httpClient.post<SuggestedMap>(`${this.apiUrl}wypicker/delete-suggested-map`, suggestedMap);
 	}
 }

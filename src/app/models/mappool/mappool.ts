@@ -2,8 +2,8 @@ import { ModBracket } from "./mod-bracket";
 
 export class Mappool {
 	id: number;
-	mappoolName: String;
-	bestOf: String;
+	mappoolName: string;
+	bestOf: string;
 	modBrackets: ModBracket[] = [];
 
 	/**

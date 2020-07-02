@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Delete a suggested map</h2>
+
+<mat-dialog-content class="mat-typography">
+	Are you sure you want to delete the following suggested map:
+
+	<hr />
+
+	<div>
+		<div><b>Mappool:</b> {{ data.suggestedMap.mappool.mappoolName }}</div>
+		<div><b>Beatmap:</b> {{ data.suggestedMap.beatmap.getFullBeatmapName() }}</div>
+		<div><b>Mod(s):</b> {{ data.suggestedMap.getModBracketNames() }}</div>
+	</div>
+
+	<hr />
+
+	<div class="alert alert-danger">
+		<b>NOTE:</b> This action is permanent. Once the suggested map has been deleted, this can not be retrieved anymore.
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button mat-button [mat-dialog-close]="false">Cancel</button>
+	<button mat-button [mat-dialog-close]="data.suggestedMap" color="warn" cdkFocusInitial>Delete</button>
+</mat-dialog-actions>

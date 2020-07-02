@@ -92,7 +92,7 @@ export class Tournament {
 	 * Get the image from the gamemode
 	 */
 	public getGamemodeImage() {
-		return `assets/images/gamemodes/mode-${this.defaultGamemode}.png`;
+		return `/assets/images/gamemodes/mode-${this.defaultGamemode}.png`;
 	}
 
 	/**

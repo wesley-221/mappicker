@@ -118,12 +118,18 @@
 						"tsConfig": "src/tsconfig.spec.json",
 						"karmaConfig": "src/karma.conf.js",
 						"scripts": [],
-						"styles": [
-							"src/styles.scss"
-						],
 						"assets": [
 							"src/assets"
 						],
+						"styles": [
+							"src/styles.scss",
+							"src/app/styles/bootstrap/scss/bootstrap-grid.scss"
+						],
+						"stylePreprocessorOptions": {
+							"includePaths": [
+								"src/app/styles"
+							]
+						},
 						"customWebpackConfig": {
 							"path": "./angular.webpack.js",
 							"target": "electron-renderer"

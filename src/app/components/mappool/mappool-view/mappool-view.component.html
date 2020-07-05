@@ -1,0 +1,11 @@
+<app-breadcrumb-component [menu]="breadCrumbs" *ngIf="breadCrumbs.length >= 3"></app-breadcrumb-component>
+
+<div *ngIf="tournament">
+	<div class="background-area">
+		<mat-tab-group mat-align-tabs="start">
+			<mat-tab label="Finalized mappool">
+				<app-finalized-mappool [tournament]="tournament" [mappool]="mappool"></app-finalized-mappool>
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+</div>

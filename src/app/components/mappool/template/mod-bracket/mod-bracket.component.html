@@ -51,6 +51,13 @@
 
 					<p>Select the amount of maps required for this specific mod bracket.</p>
 				</div>
+
+				<div class="col">
+					<mat-form-field class="form-control">
+						<mat-label>Mod bracket colour</mat-label>
+						<input matInput [(colorPicker)]="modBracket.modBracketColour" [style.color]="modBracket.modBracketColour" [value]="modBracket.modBracketColour" [cpPosition]="'bottom'" [cpAlphaChannel]="'disabled'" [cpPresetColors]="['#f3f3f3', '#fff2cc', '#f4cccc', '#c9daf8', '#d9d2e9', '#b6d7a8']" />
+					</mat-form-field>
+				</div>
 			</div>
 		</div>
 	</div>

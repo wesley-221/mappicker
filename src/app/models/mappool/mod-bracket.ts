@@ -6,6 +6,20 @@ export class ModBracket {
 	modBracketName: string = "Unnamed mod bracket";
 	mods: Mods[];
 	mapsRequired: number = 1;
+	modBracketColour: string;
+
+	/**
+	 * Get the maps required as an array
+	 */
+	public getMapsRequiredAsArray() {
+		let mapsRequired = [];
+
+		for (let i = 0; i < this.mapsRequired; i++) {
+			mapsRequired.push(i);
+		}
+
+		return mapsRequired;
+	}
 
 	/**
 	 * Serialize the json to a tournament object
@@ -18,6 +32,7 @@ export class ModBracket {
 		newModBracket.modBracketName = json.modBracketName;
 		newModBracket.mods = json.mods;
 		newModBracket.mapsRequired = json.mapsRequired;
+		newModBracket.modBracketColour = json.modBracketColour;
 
 		return newModBracket;
 	}
@@ -30,9 +45,11 @@ export class ModBracket {
 		const newModBracket = new ModBracket();
 
 		newModBracket.id = modBracket.id;
+		newModBracket.index = modBracket.index;
 		newModBracket.modBracketName = modBracket.modBracketName;
 		newModBracket.mods = modBracket.mods;
 		newModBracket.mapsRequired = modBracket.mapsRequired;
+		newModBracket.modBracketColour = (modBracket.modBracketColour == (null || undefined) ? null : modBracket.modBracketColour);
 
 		return newModBracket;
 	}

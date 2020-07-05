@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Mappool } from '../../../models/mappool/mappool';
+import { Mappool } from '../../../../models/mappool/mappool';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteMappoolComponent } from '../../dialogs/delete-mappool/delete-mappool.component';
-import { Tournament } from '../../../models/tournament';
-import { AuthenticationService } from '../../../services/authentication.service';
-import { TournamentService } from '../../../services/tournament.service';
+import { DeleteMappoolComponent } from '../../../dialogs/delete-mappool/delete-mappool.component';
+import { Tournament } from '../../../../models/tournament';
+import { AuthenticationService } from '../../../../services/authentication.service';
+import { TournamentService } from '../../../../services/tournament.service';
 
 export interface MappoolDeleteDialogData {
 	mappool: Mappool
@@ -26,8 +26,12 @@ export class MappoolComponent implements OnInit {
 	navigateMappool(mappool: Mappool, event) {
 		// Check if click wasn't on a button
 		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) == -1) {
-			this.route.navigate(['mappool', mappool.id]);
+			this.route.navigate(['mappool', this.tournament.id, mappool.id]);
 		}
+	}
+
+	editMappool(mappool: Mappool) {
+		this.route.navigate(['mappool-edit', this.tournament.id, mappool.id]);
 	}
 
 	deleteMappool() {

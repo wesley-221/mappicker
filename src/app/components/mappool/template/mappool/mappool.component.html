@@ -5,7 +5,8 @@
 		</div>
 
 		<div class="buttons" *ngIf="tournament.isCreator(authService.user)">
-			<button mat-mini-fab color="warn"(click)="deleteMappool()"><mat-icon>delete</mat-icon></button>&nbsp;
+			<button mat-mini-fab color="accent" (click)="editMappool(mappool)"><mat-icon>edit</mat-icon></button>&nbsp;
+			<button mat-mini-fab color="warn" (click)="deleteMappool()"><mat-icon>delete</mat-icon></button>
 		</div>
 	</div>
 

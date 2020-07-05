@@ -1,0 +1,49 @@
+<form [formGroup]="mappoolForm">
+	<div class="row">
+		<div class="col">
+			<h3>Mappool name</h3>
+
+			<mat-form-field class="form-control">
+				<mat-label>Mappool name</mat-label>
+				<input matInput formControlName="mappool-name" />
+
+				<mat-error *ngIf="mappoolForm.get('mappool-name').invalid && (mappoolForm.get('mappool-name').dirty || mappoolForm.get('mappool-name').touched)">
+					This field is required.
+				</mat-error>
+			</mat-form-field>
+
+			<p>The name of the mappool.</p>
+		</div>
+
+		<div class="col">
+			<h3>Match condition</h3>
+
+			<mat-form-field class="form-control">
+				<mat-label>Match condition</mat-label>
+				<mat-select formControlName="mappool-match-condition">
+					<mat-option [value]="best" *ngFor="let best of bestOf">
+						best of {{ best }}
+					</mat-option>
+				</mat-select>
+
+				<mat-error *ngIf="mappoolForm.get('mappool-match-condition').invalid && (mappoolForm.get('mappool-match-condition').dirty || mappoolForm.get('mappool-match-condition').touched)">
+					This field is required.
+				</mat-error>
+			</mat-form-field>
+
+			<p>Select the <b>Best of #</b> so that the mappickers will know how many maps they have to pick so that the mappool won't deplete during a match.</p>
+		</div>
+	</div>
+
+	<hr />
+	<h3>Mod brackets</h3>
+	<button mat-raised-button (click)="addNewModBracket()" color="primary"><mat-icon>add</mat-icon> add new modbracket</button>
+
+	<div class="alert alert-warning" *ngIf="mappool.modBracketCount() <= 0">
+		You haven't created any mod brackets yet.
+	</div>
+
+	<div class="all-brackets background-area" *ngIf="mappool.modBracketCount() > 0">
+		<app-mod-bracket [modBracketForm]="mappoolForm" [modBracket]="modBracket" *ngFor="let modBracket of mappool.modBrackets" (deleteBracket)="deleteBracket($event)"></app-mod-bracket>
+	</div>
+</form>

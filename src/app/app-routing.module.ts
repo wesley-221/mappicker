@@ -10,6 +10,8 @@ import { TournamentCreationComponent } from './components/tournament/tournament-
 import { TournamentViewComponent } from './components/tournament/tournament-view/tournament-view.component';
 import { LoggedInGuard } from './guards/logged-in-guard';
 import { environment } from '../environments/environment';
+import { MappoolViewComponent } from './components/mappool/mappool-view/mappool-view.component';
+import { MappoolEditComponent } from './components/mappool/mappool-edit/mappool-edit.component';
 
 const loginGuardsForProd = environment.production == true ? [LoggedInGuard] : [];
 
@@ -26,6 +28,8 @@ const routes: Routes = [
 			{ path: 'tournament/:id', component: TournamentViewComponent, canActivate: [...loginGuardsForProd] },
 
 			{ path: 'mappool-create/:id', component: MappoolCreateComponent, canActivate: [...loginGuardsForProd] },
+			{ path: 'mappool-edit/:tournamentId/:mappoolId', component: MappoolEditComponent, canActivate: [...loginGuardsForProd] },
+			{ path: 'mappool/:tournamentId/:mappoolId', component: MappoolViewComponent, canActivate: [...loginGuardsForProd] },
 
 			{ path: '..', component: ErrorComponent }
 		]

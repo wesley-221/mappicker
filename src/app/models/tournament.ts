@@ -89,6 +89,18 @@ export class Tournament {
 	}
 
 	/**
+	 * Update a mappool with the
+	 * @param mappool the mappool to update
+	 */
+	public updateMappool(mappool: Mappool): void {
+		for (let i in this.mappools) {
+			if (this.mappools[i].id == mappool.id) {
+				this.mappools[i] = Mappool.makeTrueCopy(mappool);
+			}
+		}
+	}
+
+	/**
 	 * Get the image from the gamemode
 	 */
 	public getGamemodeImage() {

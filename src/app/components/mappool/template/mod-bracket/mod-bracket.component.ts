@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ModBracket } from '../../../models/mappool/mod-bracket';
+import { ModBracket } from '../../../../models/mappool/mod-bracket';
 import { FormGroup } from '@angular/forms';
-import { Mods } from '../../../models/misc-osu';
+import { Mods } from '../../../../models/misc-osu';
 import { isNumber } from 'util';
 
 @Component({
@@ -13,6 +13,7 @@ export class ModBracketComponent implements OnInit {
 	@Input() modBracketForm: FormGroup;
 	@Input() modBracket: ModBracket;
 	@Output() deleteBracket = new EventEmitter<ModBracket>();
+	@Input() modBracketColor: string = null;
 
 	collapsed: boolean = false;
 	allMods: String[] = [];
@@ -51,5 +52,6 @@ export class ModBracketComponent implements OnInit {
 		this.modBracket.modBracketName = this.modBracketForm.get(this.getModBracketNameValue()).value;
 		this.modBracket.mods = this.modBracketForm.get(this.getModBracketModsValue()).value;
 		this.modBracket.mapsRequired = this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value != "" ? this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value : 1;
+
 	}
 }

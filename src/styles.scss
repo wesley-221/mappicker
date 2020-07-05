@@ -101,7 +101,6 @@ hr {
 }
 
 .background-area {
-	overflow: hidden;
 	border: 1px solid darken($background-color, 15%);
 	background-color: $tile-background-color;
 	padding: 8px;
@@ -121,5 +120,18 @@ hr {
 		-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
 		-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
 		box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+	}
+}
+
+// Override colors so its dark themed
+.color-picker {
+	&.open {
+		background-color: $tile-background-color;
+
+		.rgba-text, .hex-text, .hsla-text {
+			div {
+				color: white !important;
+			}
+		}
 	}
 }

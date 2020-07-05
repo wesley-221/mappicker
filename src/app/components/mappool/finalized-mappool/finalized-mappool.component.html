@@ -1,0 +1,19 @@
+<div class="mappool">
+	<div class="mappool-header">
+		<h1>{{ mappool.mappoolName }}</h1>
+	</div>
+
+	<div class="mappool-body">
+		<div class="mod-bracket" *ngFor="let modBracket of mappool.modBrackets">
+			<div class="mod-bracket-header" [style.backgroundColor]="modBracket.modBracketColour">
+				{{ modBracket.modBracketName }}
+			</div>
+
+			<div class="mod-bracket-body">
+				<div class="mod-bracket-map" *ngFor="let modBracketMap of modBracket.getMapsRequiredAsArray()">
+					{{ modBracketMap }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

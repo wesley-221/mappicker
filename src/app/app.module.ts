@@ -31,14 +31,19 @@ import { TournamentComponent } from './components/tournament/tournament/tourname
 import { TournamentViewComponent } from './components/tournament/tournament-view/tournament-view.component';
 import { TournamentInterfaceComponent } from './components/tournament/tournament-interface/tournament-interface.component';
 import { DeleteTournamentComponent } from './components/dialogs/delete-tournament/delete-tournament.component';
-import { ModBracketComponent } from './components/mappool/mod-bracket/mod-bracket.component';
-import { MappoolComponent } from './components/mappool/mappool/mappool.component';
+import { ModBracketComponent } from './components/mappool/template/mod-bracket/mod-bracket.component';
+import { MappoolComponent } from './components/mappool/template/mappool/mappool.component';
 import { DeleteMappoolComponent } from './components/dialogs/delete-mappool/delete-mappool.component';
 import { SuggestAMapComponent } from './components/dialogs/suggest-a-map/suggest-a-map.component';
 import { AlertComponent } from './components/main/alert/alert.component';
 import { SuggestedMapsListComponent } from './components/suggested-maps/suggested-maps-list/suggested-maps-list.component';
 import { DeleteSuggestedMapComponent } from './components/dialogs/delete-suggested-map/delete-suggested-map.component';
 import { FilterSuggestedMapsPipe } from './pipes/filter-suggested-maps.pipe';
+import { MappoolViewComponent } from './components/mappool/mappool-view/mappool-view.component';
+import { FinalizedMappoolComponent } from './components/mappool/finalized-mappool/finalized-mappool.component';
+import { MappoolCreationTemplateComponent } from './components/mappool/template/mappool-creation-template/mappool-creation-template.component';
+import { MappoolEditComponent } from './components/mappool/mappool-edit/mappool-edit.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
 	declarations: [
@@ -67,7 +72,11 @@ import { FilterSuggestedMapsPipe } from './pipes/filter-suggested-maps.pipe';
 		AlertComponent,
 		SuggestedMapsListComponent,
 		DeleteSuggestedMapComponent,
-		FilterSuggestedMapsPipe
+		FilterSuggestedMapsPipe,
+		MappoolViewComponent,
+		FinalizedMappoolComponent,
+		MappoolCreationTemplateComponent,
+		MappoolEditComponent
 	],
 	imports: [
 		BrowserModule,
@@ -77,7 +86,8 @@ import { FilterSuggestedMapsPipe } from './pipes/filter-suggested-maps.pipe';
 		AngularMaterialModule,
 		BrowserAnimationsModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		ColorPickerModule
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

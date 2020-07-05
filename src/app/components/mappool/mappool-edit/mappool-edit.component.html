@@ -1,0 +1,13 @@
+<app-breadcrumb-component [menu]="breadCrumbs" *ngIf="breadCrumbs.length >= 3"></app-breadcrumb-component>
+
+<div *ngIf="mappool">
+	<h1>{{ mappool.mappoolName }}</h1>
+	<hr />
+
+	<app-mappool-creation-template [mappool]="mappool" [mappoolForm]="mappoolForm"></app-mappool-creation-template>
+
+	<hr />
+	<h1>Updating the mappool</h1>
+	<p>Now that the mappool and mod brackets have been changed, you have to finalize the mappool by clicking on the button below.</p>
+	<button mat-flat-button color="primary" (click)="updateMappool()">Update</button>
+</div>

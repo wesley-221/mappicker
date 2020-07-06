@@ -25,7 +25,7 @@ export class MappoolComponent implements OnInit {
 
 	navigateMappool(mappool: Mappool, event): void {
 		// Check if click wasn't on a button
-		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) === -1) {
+		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) == -1) {
 			this.route.navigate(['mappool', this.tournament.id, mappool.id]);
 		}
 	}
@@ -42,7 +42,7 @@ export class MappoolComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result === true) {
+			if (result == true) {
 				this.tournament.removeMappool(this.mappool);
 
 				this.tournamentService.updateTournament(this.tournament).subscribe(() => {

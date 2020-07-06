@@ -33,7 +33,7 @@ export class MappoolEditComponent implements OnInit {
 			const mappoolId = params.mappoolId;
 
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res === true) {
+				if (res == true) {
 					this.tournament = Tournament.makeTrueCopy(this.tournamentService.getTournamentById(tournamentId));
 
 					// Setup temporary variable to handle all the reactive form validation

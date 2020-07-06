@@ -11,7 +11,7 @@ export class FilterSuggestedMapsPipe implements PipeTransform {
 		let returnSuggestedMaps: SuggestedMap[];
 
 		// Filters for the generic text
-		if (filterByText !== undefined) {
+		if (filterByText != undefined) {
 			returnSuggestedMaps = allSuggestedMaps.filter(suggestedMap => {
 				return suggestedMap.beatmap.getFullBeatmapName().toLowerCase().includes(filterByText) ||
 					suggestedMap.mappool.mappoolName.toLowerCase().includes(filterByText) ||
@@ -21,21 +21,21 @@ export class FilterSuggestedMapsPipe implements PipeTransform {
 		}
 
 		// Check and apply the mappool filter if it has been selected
-		if (mappool !== undefined && mappool.length > 0) {
+		if (mappool != undefined && mappool.length > 0) {
 			returnSuggestedMaps = returnSuggestedMaps.filter(suggestedMap => {
 				return mappool.includes(suggestedMap.mappool.mappoolName);
 			});
 		}
 
 		// Check and apply the modbrackets filter if it has been selected
-		if (modBrackets !== undefined && modBrackets.length > 0) {
+		if (modBrackets != undefined && modBrackets.length > 0) {
 			returnSuggestedMaps = returnSuggestedMaps.filter(suggestedMap => {
 				return modBrackets.some(modBracket => suggestedMap.getModBracketNames().includes(modBracket));
 			});
 		}
 
 		// Check and apply the mappicker filter if it has been selected
-		if (mappickers !== undefined && mappickers.length > 0) {
+		if (mappickers != undefined && mappickers.length > 0) {
 			returnSuggestedMaps = returnSuggestedMaps.filter(suggestedMap => {
 				return mappickers.includes(suggestedMap.submittedBy.username);
 			});

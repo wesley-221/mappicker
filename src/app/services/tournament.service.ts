@@ -73,7 +73,7 @@ export class TournamentService {
 	 */
 	getTournamentById(tournamentId: number): Tournament {
 		for (const tournament of this.allTournaments) {
-			if (tournament.id === tournamentId) {
+			if (tournament.id == tournamentId) {
 				return tournament;
 			}
 		}

@@ -23,7 +23,7 @@ export class TournamentComponent implements OnInit {
 
 	navigateToTournament(tournament: Tournament, event: any): void {
 		// Check if click wasn't on a button
-		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) === -1) {
+		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) == -1) {
 			this.route.navigate(['tournament', tournament.id]);
 		}
 	}
@@ -36,7 +36,7 @@ export class TournamentComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result === true) {
+			if (result == true) {
 				this.tournamentService.deleteTournament(tournament).subscribe(() => {
 					this.tournamentService.importTournaments();
 				});

@@ -95,7 +95,7 @@ export class RegisterComponent implements OnInit {
 			const v1 = checkForm.controls[val1];
 			const v2 = checkForm.controls[val2];
 
-			return v1.value === v2.value ? v2.setErrors(null) : v2.setErrors({ notEquivalent: true });
+			return v1.value == v2.value ? v2.setErrors(null) : v2.setErrors({ notEquivalent: true });
 		}
 	}
 }

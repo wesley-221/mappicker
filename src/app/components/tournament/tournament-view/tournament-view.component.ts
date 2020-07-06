@@ -29,7 +29,7 @@ export class TournamentViewComponent implements OnInit {
 
 		this.route.params.subscribe(params => {
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res === true) {
+				if (res == true) {
 					const thisTournament = this.tournamentService.getTournamentById(params.id);
 					this.tournament = Tournament.makeTrueCopy(thisTournament);
 

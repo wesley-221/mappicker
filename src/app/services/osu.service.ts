@@ -32,7 +32,7 @@ export class OsuService {
 		const oauthToken = this.storeService.get(this.STORE_OAUTH);
 
 		// Check if there is a token saved
-		if (oauthToken !== undefined) {
+		if (oauthToken != undefined) {
 			this.oauthToken = oauthToken.access_token;
 			this.oauthTokenExpiresAt = oauthToken.expires;
 
@@ -47,7 +47,7 @@ export class OsuService {
 			else {
 				const authenticatedUser = this.storeService.get(this.STORE_AUTHENTICATED_USER);
 
-				if (authenticatedUser !== undefined) {
+				if (authenticatedUser != undefined) {
 					this.authenticatedUser = EndpointMe.serializeJson(authenticatedUser);
 				}
 			}
@@ -68,7 +68,7 @@ export class OsuService {
 
 		let finalLink = 'https://osu.ppy.sh/oauth/authorize?'
 
-		if (parameters !== null) {
+		if (parameters != null) {
 			parameters.forEach(parameter => {
 				finalLink += `${parameter.parameterName}=${parameter.value}&`
 			});

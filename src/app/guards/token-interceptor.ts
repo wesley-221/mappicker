@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 		return next.handle(req).pipe(catchError((error: HttpErrorResponse): Observable<any> => {
 			// Show the generic known errors, have to figure out the other errors over time
-			if (error.status === 401 || error.status === 403) {
+			if (error.status == 401 || error.status == 403) {
 				// this.toastService.addToast(error.error.message, ToastType.Error);
 
 				return of(error.error.message);

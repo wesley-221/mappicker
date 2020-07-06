@@ -49,7 +49,7 @@ export class ModBracket {
 		newModBracket.modBracketName = modBracket.modBracketName;
 		newModBracket.mods = modBracket.mods;
 		newModBracket.mapsRequired = modBracket.mapsRequired;
-		newModBracket.modBracketColour = (modBracket.modBracketColour === (null || undefined) ? null : modBracket.modBracketColour);
+		newModBracket.modBracketColour = (modBracket.modBracketColour == (null || undefined) ? null : modBracket.modBracketColour);
 
 		return newModBracket;
 	}

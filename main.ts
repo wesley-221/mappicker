@@ -4,7 +4,7 @@ import * as url from 'url';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
-	serve = args.some(val => val === '--serve');
+	serve = args.some(val => val == '--serve');
 
 function createMainWindow(): BrowserWindow {
 	const electronScreen = screen;
@@ -55,13 +55,13 @@ try {
 	app.on('ready', () => setTimeout(createMainWindow, 400));
 
 	app.on('window-all-closed', () => {
-		if (process.platform !== 'darwin') {
+		if (process.platform != 'darwin') {
 			app.quit();
 		}
 	});
 
 	app.on('activate', () => {
-		if (win === null) {
+		if (win == null) {
 			createMainWindow();
 		}
 	});

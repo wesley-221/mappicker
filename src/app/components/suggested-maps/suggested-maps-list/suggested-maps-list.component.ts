@@ -38,7 +38,7 @@ export class SuggestedMapsListComponent implements OnInit {
 		this.importSuggestedMaps(this.tournament);
 
 		this.tournamentService.finishedImporting().subscribe(updated => {
-			if (updated === true) {
+			if (updated == true) {
 				this.importSuggestedMaps(this.tournament);
 			}
 		});

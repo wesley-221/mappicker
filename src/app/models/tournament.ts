@@ -16,7 +16,7 @@ export class Tournament {
 	 */
 	public getMappoolById(mappoolId: number): Mappool {
 		for (const mappool of this.mappools) {
-			if (mappool.id === mappoolId) {
+			if (mappool.id == mappoolId) {
 				return mappool;
 			}
 		}
@@ -46,7 +46,7 @@ export class Tournament {
 	 * @param user the user to check
 	 */
 	public isCreator(user: User): boolean {
-		return this.createdBy.id === user.id;
+		return this.createdBy.id == user.id;
 	}
 
 	/**
@@ -94,7 +94,7 @@ export class Tournament {
 	 */
 	public updateMappool(mappool: Mappool): void {
 		this.mappools.forEach(mappoolIteration => {
-			if (mappoolIteration.id === mappool.id) {
+			if (mappoolIteration.id == mappool.id) {
 				mappoolIteration = Mappool.makeTrueCopy(mappool);
 			}
 		})

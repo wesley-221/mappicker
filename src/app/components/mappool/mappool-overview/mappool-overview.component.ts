@@ -43,7 +43,7 @@ export class MappoolOverviewComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe((suggestedMap: SuggestedMap) => {
-			if (suggestedMap !== null) {
+			if (suggestedMap != null) {
 				this.mappoolService.suggestAMap(suggestedMap).subscribe(() => {
 					const modBrackets = [];
 

@@ -21,7 +21,7 @@ export class MappoolViewComponent implements OnInit {
 			const mappoolId = params.mappoolId;
 
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res === true) {
+				if (res == true) {
 					this.tournament = Tournament.makeTrueCopy(this.tournamentService.getTournamentById(tournamentId));
 					this.mappool = Mappool.makeTrueCopy(this.tournament.getMappoolById(mappoolId));
 

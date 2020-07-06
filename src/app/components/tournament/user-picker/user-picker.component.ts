@@ -20,12 +20,12 @@ export class UserPickerComponent implements OnInit {
 				let foundUser = false;
 
 				this.selectedUsers.forEach(selectedUser => {
-					if (user.id === selectedUser.id) {
+					if (user.id == selectedUser.id) {
 						foundUser = true;
 					}
 				});
 
-				if (foundUser === false)
+				if (foundUser == false)
 					this.allUsers.push(user);
 			});
 		});

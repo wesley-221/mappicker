@@ -35,7 +35,7 @@ export class SuggestAMapComponent {
 		const beatmap = new RegExp(BeatmapRegex).exec(this.beatmapLink);
 
 		// Invalid beatmap url
-		if (beatmap === null) {
+		if (beatmap == null) {
 			return;
 		}
 
@@ -71,7 +71,7 @@ export class SuggestAMapComponent {
 				}
 
 				// The beatmap has been suggested once
-				if (foundBeatmaps.length === 1) {
+				if (foundBeatmaps.length == 1) {
 					foundBeatmaps[0].modBrackets.forEach(modBracket => {
 						pickedModBrackets.push(modBracket.modBracketName);
 					})

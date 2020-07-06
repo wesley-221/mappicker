@@ -22,7 +22,7 @@ export class AuthenticationService {
 	}
 
 	public isAdmin(): boolean {
-		return this.user !== undefined && this.user.admin === true;
+		return this.user != undefined && this.user.admin == true;
 	}
 
 	/**

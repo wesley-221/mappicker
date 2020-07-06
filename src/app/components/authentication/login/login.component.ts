@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
 		this.isAuthenticating = true;
 
 		this.osuService.startOsuOauthProcess().subscribe(token => {
-			if (token !== null) {
+			if (token != null) {
 				this.osuService.cacheOsuOauthToken(token);
 
 				this.osuService.getMeData().subscribe(me => {

@@ -51,6 +51,6 @@ export class ModBracketComponent implements OnInit {
 	updateModBracket(): void {
 		this.modBracket.modBracketName = this.modBracketForm.get(this.getModBracketNameValue()).value;
 		this.modBracket.mods = this.modBracketForm.get(this.getModBracketModsValue()).value;
-		this.modBracket.mapsRequired = this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value !== '' ? this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value : 1;
+		this.modBracket.mapsRequired = this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value != '' ? this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value : 1;
 	}
 }

@@ -20,7 +20,7 @@ export class MappoolCreateComponent implements OnInit {
 	constructor(private route: Router, private router: ActivatedRoute, private tournamentService: TournamentService) {
 		this.router.params.subscribe(param => {
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res === true) {
+				if (res == true) {
 					const thisTournament = this.tournamentService.getTournamentById(param.id);
 					this.tournament = Tournament.makeTrueCopy(thisTournament);
 

@@ -17,11 +17,11 @@ export class MappoolViewComponent implements OnInit {
 
 	constructor(private route: ActivatedRoute, private tournamentService: TournamentService) {
 		this.route.params.subscribe(params => {
-			const tournamentId = params.tournamentId,
-				mappoolId = params.mappoolId;
+			const tournamentId = params.tournamentId;
+			const mappoolId = params.mappoolId;
 
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res == true) {
+				if (res === true) {
 					this.tournament = Tournament.makeTrueCopy(this.tournamentService.getTournamentById(tournamentId));
 					this.mappool = Mappool.makeTrueCopy(this.tournament.getMappoolById(mappoolId));
 

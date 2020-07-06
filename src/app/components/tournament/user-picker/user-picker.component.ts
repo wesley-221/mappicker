@@ -15,30 +15,30 @@ export class UserPickerComponent implements OnInit {
 
 	constructor(private userService: UserService) {
 		userService.getUserList().subscribe(response => {
-			for (let item in response) {
-				const user = User.serializeJson(response[item]);
+			response.forEach(userIteration => {
+				const user = User.serializeJson(userIteration);
 				let foundUser = false;
 
-				for (let mappicker in this.selectedUsers) {
-					if (user.id == this.selectedUsers[mappicker].id) {
+				this.selectedUsers.forEach(selectedUser => {
+					if (user.id === selectedUser.id) {
 						foundUser = true;
 					}
-				}
+				});
 
-				if (foundUser == false)
+				if (foundUser === false)
 					this.allUsers.push(user);
-			}
+			});
 		});
 	}
 
 	ngOnInit(): void { }
 
-	addNewMappicker(user: User) {
+	addNewMappicker(user: User): void {
 		this.allUsers.splice(this.allUsers.indexOf(user), 1);
 		this.selectedUsers.push(user);
 	}
 
-	removeMappicker(user: User) {
+	removeMappicker(user: User): void {
 		this.allUsers.push(user);
 		this.selectedUsers.splice(this.selectedUsers.indexOf(user), 1);
 	}

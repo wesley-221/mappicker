@@ -1,8 +1,8 @@
-import { Tournament } from "../tournament";
-import { Beatmap } from "./beatmap";
-import { Mappool } from "./mappool";
-import { ModBracket } from "./mod-bracket";
-import { User } from "../authentication/user";
+import { Tournament } from '../tournament';
+import { Beatmap } from './beatmap';
+import { Mappool } from './mappool';
+import { ModBracket } from './mod-bracket';
+import { User } from '../authentication/user';
 
 export class SuggestedMap {
 	tournament: Tournament;
@@ -14,12 +14,12 @@ export class SuggestedMap {
 	/**
 	 * Get all the modbracket names seperated by a comma
 	 */
-	public getModBracketNames() {
-		let modBrackets: string[] = [];
+	public getModBracketNames(): string {
+		const modBrackets: string[] = [];
 
-		for (let modBracket in this.modBrackets) {
-			modBrackets.push(this.modBrackets[modBracket].modBracketName);
-		}
+		this.modBrackets.forEach(modBracket => {
+			modBrackets.push(modBracket.modBracketName);
+		});
 
 		return modBrackets.join(', ');
 	}
@@ -35,7 +35,7 @@ export class SuggestedMap {
 		newSuggestedMap.beatmap = Beatmap.serializeJson(json.beatmap);
 		newSuggestedMap.mappool = Mappool.serializeJson(json.mappool);
 
-		for (let modBracket in json.modBrackets) {
+		for (const modBracket in json.modBrackets) {
 			newSuggestedMap.modBrackets.push(ModBracket.serializeJson(json.modBrackets[modBracket]));
 		}
 

@@ -10,16 +10,16 @@ export class Beatmapset {
 	title: string;
 	user_id: number;
 	video: boolean;
-	availability: { download_disabled: boolean, more_information: string };
+	availability: { download_disabled: boolean; more_information: string };
 	bpm: number;
 	can_be_hyped: boolean;
 	discussion_enabled: boolean;
 	discussion_locked: boolean;
-	hype: { current: number, required: number };
+	hype: { current: number; required: number };
 	is_scoreable: boolean;
 	last_updated: Date;
 	legacy_thread_url: string;
-	nominations: { current: number, required: number };
+	nominations: { current: number; required: number };
 	ranked: number;
 	ranked_date: Date;
 	storyboard: boolean;
@@ -30,7 +30,7 @@ export class Beatmapset {
 	/**
 	 * Get the link of the beatmap cover image
 	 */
-	public getBeatmapsetCover() {
+	public getBeatmapsetCover(): string {
 		return `https://assets.ppy.sh/beatmaps/${this.id}/covers/cover.jpg`;
 	}
 

@@ -15,11 +15,11 @@ export class ModBracketComponent implements OnInit {
 	@Output() deleteBracket = new EventEmitter<ModBracket>();
 	@Input() modBracketColor: string = null;
 
-	collapsed: boolean = false;
-	allMods: String[] = [];
+	collapsed = false;
+	allMods: string[] = [];
 
 	constructor() {
-		for (let mod in Mods) {
+		for (const mod in Mods) {
 			if (!isNumber(Mods[mod])) {
 				this.allMods.push(Mods[mod]);
 			}
@@ -28,30 +28,29 @@ export class ModBracketComponent implements OnInit {
 
 	ngOnInit(): void { }
 
-	collapseModBracket() {
+	collapseModBracket(): void {
 		this.collapsed = !this.collapsed;
 	}
 
-	deleteModBracket() {
+	deleteModBracket(): void {
 		this.deleteBracket.emit(this.modBracket);
 	}
 
-	getModBracketNameValue() {
+	getModBracketNameValue(): string {
 		return `mod-bracket-name-${this.modBracket.index}`;
 	}
 
-	getModBracketModsValue() {
+	getModBracketModsValue(): string {
 		return `mod-bracket-mods-${this.modBracket.index}`;
 	}
 
-	getModBracketMapsRequiredValue() {
+	getModBracketMapsRequiredValue(): string {
 		return `mod-bracket-maps-required-${this.modBracket.index}`;
 	}
 
-	updateModBracket() {
+	updateModBracket(): void {
 		this.modBracket.modBracketName = this.modBracketForm.get(this.getModBracketNameValue()).value;
 		this.modBracket.mods = this.modBracketForm.get(this.getModBracketModsValue()).value;
-		this.modBracket.mapsRequired = this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value != "" ? this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value : 1;
-
+		this.modBracket.mapsRequired = this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value !== '' ? this.modBracketForm.get(this.getModBracketMapsRequiredValue()).value : 1;
 	}
 }

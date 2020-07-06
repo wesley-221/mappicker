@@ -36,7 +36,7 @@ export class TournamentCreationComponent implements OnInit {
 
 	ngOnInit(): void { }
 
-	createTournament() {
+	createTournament(): void {
 		if (!this.tournamentForm.invalid) {
 			this.tournament.tournamentName = this.tournamentForm.get('tournament-name').value;
 			this.tournament.defaultGamemode = this.tournamentForm.get('tournament-gamemode').value;

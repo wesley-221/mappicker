@@ -20,7 +20,7 @@ export class MappoolCreateComponent implements OnInit {
 	constructor(private route: Router, private router: ActivatedRoute, private tournamentService: TournamentService) {
 		this.router.params.subscribe(param => {
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res == true) {
+				if (res === true) {
 					const thisTournament = this.tournamentService.getTournamentById(param.id);
 					this.tournament = Tournament.makeTrueCopy(thisTournament);
 
@@ -42,7 +42,7 @@ export class MappoolCreateComponent implements OnInit {
 
 	ngOnInit(): void { }
 
-	createMappool() {
+	createMappool(): void {
 		if (!this.mappoolForm.invalid) {
 			this.mappool.mappoolName = this.mappoolForm.get('mappool-name').value;
 			this.mappool.bestOf = this.mappoolForm.get('mappool-match-condition').value;

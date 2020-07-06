@@ -7,14 +7,14 @@ import { User } from '../models/authentication/user';
 
 export class SearchPipe implements PipeTransform {
 	transform(allUsers: User[], username: string): any {
-		if (username == '' || username == undefined) {
+		if (username === '' || username === undefined) {
 			return allUsers;
 		}
 
 		let returnUsers = [];
 
 		returnUsers = allUsers.filter(user => {
-			return user.username.toLowerCase().indexOf(username.toLowerCase()) > -1;
+			return user.username.toLowerCase().includes(username.toLowerCase());
 		});
 
 		return returnUsers;

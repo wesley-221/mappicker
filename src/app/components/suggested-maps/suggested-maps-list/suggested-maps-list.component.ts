@@ -9,7 +9,7 @@ import { AlertService } from '../../../services/alert.service';
 import { TournamentService } from '../../../services/tournament.service';
 
 export interface DeleteSuggestedMapDialog {
-	suggestedMap: SuggestedMap
+	suggestedMap: SuggestedMap;
 }
 
 @Component({
@@ -22,7 +22,7 @@ export class SuggestedMapsListComponent implements OnInit {
 
 	allSuggestedMaps: SuggestedMap[] = [];
 
-	filterByText: string = "";
+	filterByText = '';
 	filterByMappool: string[];
 	filterByMods: string[];
 	filterByMappicker: string[];
@@ -38,7 +38,7 @@ export class SuggestedMapsListComponent implements OnInit {
 		this.importSuggestedMaps(this.tournament);
 
 		this.tournamentService.finishedImporting().subscribe(updated => {
-			if (updated == true) {
+			if (updated === true) {
 				this.importSuggestedMaps(this.tournament);
 			}
 		});
@@ -48,7 +48,7 @@ export class SuggestedMapsListComponent implements OnInit {
 	 * Open a dialog to delete the suggested map
 	 * @param suggestedMap
 	 */
-	deleteSuggestedMap(suggestedMap: SuggestedMap) {
+	deleteSuggestedMap(suggestedMap: SuggestedMap): void {
 		const dialogRef = this.dialog.open(DeleteSuggestedMapComponent, {
 			data: {
 				suggestedMap: suggestedMap
@@ -56,12 +56,12 @@ export class SuggestedMapsListComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe((suggestedMap: SuggestedMap) => {
-			this.mappoolService.deleteSuggestedMap(suggestedMap).subscribe(res => {
+			this.mappoolService.deleteSuggestedMap(suggestedMap).subscribe(() => {
 				this.tournamentService.importTournaments();
 
 				this.allSuggestedMaps.splice(this.allSuggestedMaps.indexOf(suggestedMap), 1);
 
-				this.alertService.success(`Successfully deleted the suggested map.`);
+				this.alertService.success('Successfully deleted the suggested map.');
 			});
 		});
 	}
@@ -70,20 +70,20 @@ export class SuggestedMapsListComponent implements OnInit {
 	 * Import the suggested maps
 	 * @param tournament
 	 */
-	importSuggestedMaps(tournament: Tournament) {
+	importSuggestedMaps(tournament: Tournament): void {
 		this.mappoolService.getAllSuggestedMapsFromTournament(tournament).subscribe(response => {
 			this.allSuggestedMaps = [];
 
-			for (let suggestedMap in response) {
-				this.allSuggestedMaps.push(SuggestedMap.serializeJson(response[suggestedMap]));
-			}
+			response.forEach(suggestedMap => {
+				this.allSuggestedMaps.push(SuggestedMap.serializeJson(suggestedMap));
+			});
 		});
 	}
 
 	/**
 	 * Manually trigger the pipe, doesn't trigger on select
 	 */
-	triggerPipe() {
+	triggerPipe(): void {
 		this.filterByText = this.filterByText;
 	}
 
@@ -91,7 +91,7 @@ export class SuggestedMapsListComponent implements OnInit {
 	 * Clear filters
 	 * @param id
 	 */
-	clear(id: number) {
+	clear(id: number): void {
 		switch (id) {
 			case 1:
 				this.filterByText = undefined;

@@ -1,4 +1,4 @@
-import { ModBracket } from "./mod-bracket";
+import { ModBracket } from './mod-bracket';
 
 export class Mappool {
 	id: number;
@@ -11,13 +11,13 @@ export class Mappool {
 	 * @param modBracketIds
 	 */
 	public getModBracketsByIds(modBracketIds: number[]): ModBracket[] {
-		let modBrackets: ModBracket[] = [];
+		const modBrackets: ModBracket[] = [];
 
-		for (let modBracket in this.modBrackets) {
-			if (modBracketIds.indexOf(this.modBrackets[modBracket].id) > -1) {
-				modBrackets.push(this.modBrackets[modBracket]);
+		this.modBrackets.forEach(modBracket => {
+			if (modBracketIds.includes(modBracket.id)) {
+				modBrackets.push(modBracket);
 			}
-		}
+		});
 
 		return modBrackets;
 	}
@@ -41,7 +41,7 @@ export class Mappool {
 	/**
 	 * Get the amount of modbrackets in the mappool
 	 */
-	public modBracketCount() {
+	public modBracketCount(): number {
 		return this.modBrackets.length;
 	}
 
@@ -56,7 +56,7 @@ export class Mappool {
 		newMappool.mappoolName = json.mappoolName;
 		newMappool.bestOf = json.bestOf;
 
-		for (let modBracket in json.modBrackets) {
+		for (const modBracket in json.modBrackets) {
 			newMappool.modBrackets.push(ModBracket.serializeJson(json.modBrackets[modBracket]));
 		}
 
@@ -74,9 +74,9 @@ export class Mappool {
 		newMappool.mappoolName = mappool.mappoolName;
 		newMappool.bestOf = mappool.bestOf;
 
-		for (let modBracket in mappool.modBrackets) {
-			newMappool.modBrackets.push(ModBracket.makeTrueCopy(mappool.modBrackets[modBracket]));
-		}
+		mappool.modBrackets.forEach(modBracket => {
+			newMappool.modBrackets.push(ModBracket.makeTrueCopy(modBracket));
+		});
 
 		return newMappool;
 	}

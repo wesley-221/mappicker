@@ -26,7 +26,7 @@ export class AlertComponent implements OnInit {
 	 * Removes the alert from the array
 	 * @param alert
 	 */
-	removeAlert(alert: Alert) {
+	removeAlert(alert: Alert): void {
 		this.alerts.splice(this.alerts.indexOf(alert), 1);
 	}
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../models/authentication/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,7 +15,7 @@ export class UserService {
 	/**
 	 * Get a list with all the users
 	 */
-	public getUserList() {
-		return this.httpClient.get(`${this.apiUrl}users/list`)
+	public getUserList(): Observable<User[]> {
+		return this.httpClient.get<User[]>(`${this.apiUrl}users/list`);
 	}
 }

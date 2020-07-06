@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { AllGamemodes } from '../../../models/misc-osu';
 import { Tournament } from '../../../models/tournament';
 import { UserService } from '../../../services/user.service';

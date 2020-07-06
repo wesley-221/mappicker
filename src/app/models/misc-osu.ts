@@ -5,11 +5,11 @@ export enum Gamemodes {
 	Mania = 3
 }
 
-export const AllGamemodes: { id: Gamemodes, name: String }[] = [
-	{ id: Gamemodes.Osu, name: "osu!" },
-	{ id: Gamemodes.Taiko, name: "osu!taiko" },
-	{ id: Gamemodes.Catch, name: "osu!catch" },
-	{ id: Gamemodes.Mania, name: "osu!mania" }
+export const AllGamemodes: { id: Gamemodes; name: string }[] = [
+	{ id: Gamemodes.Osu, name: 'osu!' },
+	{ id: Gamemodes.Taiko, name: 'osu!taiko' },
+	{ id: Gamemodes.Catch, name: 'osu!catch' },
+	{ id: Gamemodes.Mania, name: 'osu!mania' }
 ];
 
 export enum Mods {
@@ -51,5 +51,5 @@ export const BestOf: number[] = [
 	3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25
 ];
 
-export const BeatmapRegex: RegExp = /https:\/\/osu.ppy.sh\/beatmapsets\/(\d+)#(\w+)\/(\d+)/;
-export const ValidGamemodes: string[] = ["osu", "taiko", "fruits", "mania"];
+export const BeatmapRegex = /https:\/\/osu.ppy.sh\/beatmapsets\/(\d+)#(\w+)\/(\d+)/;
+export const ValidGamemodes: string[] = ['osu', 'taiko', 'fruits', 'mania'];

@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
 import { MappoolViewComponent } from './components/mappool/mappool-view/mappool-view.component';
 import { MappoolEditComponent } from './components/mappool/mappool-edit/mappool-edit.component';
 
-const loginGuardsForProd = environment.production == true ? [LoggedInGuard] : [];
+const loginGuardsForProd = environment.production === true ? [LoggedInGuard] : [];
 
 const routes: Routes = [
 	{

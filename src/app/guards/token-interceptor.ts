@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from '../services/authentication.service';
-import { Observable, of, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { environment } from "../../environments/environment";
-import { OsuService } from "../services/osu.service";
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { OsuService } from '../services/osu.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		// Only send the token to the wyBin api
 		if (req.url.includes(environment.apiUrl)) {
-			const token: String = this.authService.authToken;
+			const token: string = this.authService.authToken;
 
 			if (token) {
 				req = req.clone({ setHeaders: { Authorization: `${token}` }, withCredentials: true });
@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 		// Only send the token to the osu! api
 		if (req.url.includes(environment.osu.api_url)) {
-			const token: String = this.osuService.oauthToken;
+			const token: string = this.osuService.oauthToken;
 
 			if (token) {
 				req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` }, withCredentials: true });

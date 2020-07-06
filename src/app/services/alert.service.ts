@@ -7,7 +7,7 @@ import { Alert, AlertType } from '../models/alert';
 })
 
 export class AlertService {
-	private lastId: number = 0;
+	private lastId = 0;
 	private subject$ = new Subject<Alert>();
 
 	/**
@@ -21,7 +21,7 @@ export class AlertService {
 	 * Main alert method
 	 * @param alert
 	 */
-	private alert(alert: Alert) {
+	private alert(alert: Alert): void {
 		alert.id = this.lastId++;
 		this.subject$.next(alert);
 	}
@@ -31,7 +31,7 @@ export class AlertService {
 	 * @param message the message
 	 * @param options extra options
 	 */
-	public info(message: string, options?: Partial<Alert>) {
+	public info(message: string, options?: Partial<Alert>): void {
 		this.alert(new Alert({ ...options, type: AlertType.Info, message }));
 	}
 
@@ -40,7 +40,7 @@ export class AlertService {
 	 * @param message the message
 	 * @param options extra options
 	 */
-	public success(message: string, options?: Partial<Alert>) {
+	public success(message: string, options?: Partial<Alert>): void {
 		this.alert(new Alert({ ...options, type: AlertType.Success, message }));
 	}
 
@@ -49,7 +49,7 @@ export class AlertService {
 	 * @param message the message
 	 * @param options extra options
 	 */
-	public warning(message: string, options?: Partial<Alert>) {
+	public warning(message: string, options?: Partial<Alert>): void {
 		this.alert(new Alert({ ...options, type: AlertType.Warning, message }));
 	}
 
@@ -58,7 +58,7 @@ export class AlertService {
 	 * @param message the message
 	 * @param options extra options
 	 */
-	public error(message: string, options?: Partial<Alert>) {
+	public error(message: string, options?: Partial<Alert>): void {
 		this.alert(new Alert({ ...options, type: AlertType.Warning, message }));
 	}
 }

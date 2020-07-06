@@ -1,10 +1,10 @@
-import { Gamemodes } from "./misc-osu";
-import { User } from "./authentication/user";
-import { Mappool } from "./mappool/mappool";
+import { Gamemodes } from './misc-osu';
+import { User } from './authentication/user';
+import { Mappool } from './mappool/mappool';
 
 export class Tournament {
 	id: number;
-	tournamentName: String;
+	tournamentName: string;
 	defaultGamemode: Gamemodes;
 	mappickers: User[] = [];
 	mappools: Mappool[] = [];
@@ -15,9 +15,9 @@ export class Tournament {
 	 * @param mappoolId
 	 */
 	public getMappoolById(mappoolId: number): Mappool {
-		for (let mappool in this.mappools) {
-			if (this.mappools[mappool].id == mappoolId) {
-				return this.mappools[mappool];
+		for (const mappool of this.mappools) {
+			if (mappool.id === mappoolId) {
+				return mappool;
 			}
 		}
 
@@ -28,15 +28,15 @@ export class Tournament {
 	 * Get all modbracket names
 	 */
 	public getAllModBrackets(): string[] {
-		let allModBrackets: string[] = [];
+		const allModBrackets: string[] = [];
 
-		for (let mappool in this.mappools) {
-			for (let modBracket in this.mappools[mappool].modBrackets) {
-				if (allModBrackets.indexOf(this.mappools[mappool].modBrackets[modBracket].modBracketName) == -1) {
-					allModBrackets.push(this.mappools[mappool].modBrackets[modBracket].modBracketName);
+		this.mappools.forEach(mappool => {
+			mappool.modBrackets.forEach(modBracket => {
+				if (!allModBrackets.includes(modBracket.modBracketName)) {
+					allModBrackets.push(modBracket.modBracketName);
 				}
-			}
-		}
+			});
+		});
 
 		return allModBrackets;
 	}
@@ -45,14 +45,14 @@ export class Tournament {
 	 * Check if the given user is the creator of the tournament
 	 * @param user the user to check
 	 */
-	public isCreator(user: User) {
-		return this.createdBy.id == user.id;
+	public isCreator(user: User): boolean {
+		return this.createdBy.id === user.id;
 	}
 
 	/**
 	 * Get the amount of mappools in the tournament
 	 */
-	public mappoolCount() {
+	public mappoolCount(): number {
 		return this.mappools.length;
 	}
 
@@ -93,17 +93,17 @@ export class Tournament {
 	 * @param mappool the mappool to update
 	 */
 	public updateMappool(mappool: Mappool): void {
-		for (let i in this.mappools) {
-			if (this.mappools[i].id == mappool.id) {
-				this.mappools[i] = Mappool.makeTrueCopy(mappool);
+		this.mappools.forEach(mappoolIteration => {
+			if (mappoolIteration.id === mappool.id) {
+				mappoolIteration = Mappool.makeTrueCopy(mappool);
 			}
-		}
+		})
 	}
 
 	/**
 	 * Get the image from the gamemode
 	 */
-	public getGamemodeImage() {
+	public getGamemodeImage(): string {
 		return `/assets/images/gamemodes/mode-${this.defaultGamemode}.png`;
 	}
 
@@ -118,11 +118,11 @@ export class Tournament {
 		newTournament.tournamentName = json.tournamentName;
 		newTournament.defaultGamemode = Gamemodes[Gamemodes[json.defaultGamemode]];
 
-		for (let mappicker in json.mappickers) {
+		for (const mappicker in json.mappickers) {
 			newTournament.addMappicker(User.serializeJson(json.mappickers[mappicker]));
 		}
 
-		for (let mappool in json.mappools) {
+		for (const mappool in json.mappools) {
 			newTournament.addMappool(Mappool.serializeJson(json.mappools[mappool]));
 		}
 
@@ -142,13 +142,13 @@ export class Tournament {
 		newTournament.tournamentName = tournament.tournamentName;
 		newTournament.defaultGamemode = tournament.defaultGamemode;
 
-		for (let mappicker in tournament.mappickers) {
-			newTournament.addMappicker(User.makeTrueCopy(tournament.mappickers[mappicker]));
-		}
+		tournament.mappickers.forEach(mappicker => {
+			newTournament.addMappicker(User.makeTrueCopy(mappicker));
+		});
 
-		for (let mappool in tournament.mappools) {
-			newTournament.addMappool(Mappool.makeTrueCopy(tournament.mappools[mappool]));
-		}
+		tournament.mappools.forEach(mappool => {
+			newTournament.addMappool(Mappool.makeTrueCopy(mappool));
+		})
 
 		newTournament.createdBy = User.makeTrueCopy(tournament.createdBy);
 

@@ -17,7 +17,7 @@ export class ElectronService {
 	shell: typeof shell;
 	dialog: typeof dialog;
 
-	get isElectron() {
+	get isElectron(): boolean {
 		return window && window.process && window.process.type;
 	}
 

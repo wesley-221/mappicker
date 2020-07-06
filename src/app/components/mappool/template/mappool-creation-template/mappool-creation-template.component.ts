@@ -22,7 +22,7 @@ export class MappoolCreationTemplateComponent implements OnInit {
 		this.modBracketIndex = this.mappool.modBrackets.length + 1;
 	}
 
-	addNewModBracket() {
+	addNewModBracket(): void {
 		const newModBracket = new ModBracket();
 		newModBracket.index = this.modBracketIndex;
 
@@ -31,19 +31,12 @@ export class MappoolCreationTemplateComponent implements OnInit {
 		this.mappool.addModBracket(newModBracket);
 
 		// Add validators for modbracket fields
-		this.mappoolForm.addControl(`mod-bracket-name-${newModBracket.index}`, new FormControl('', [
-			Validators.required
-		]));
-
-		this.mappoolForm.addControl(`mod-bracket-mods-${newModBracket.index}`, new FormControl('', [
-			Validators.required
-		]));
-
-		this.mappoolForm.addControl(`mod-bracket-maps-required-${newModBracket.index}`, new FormControl('', [
-		]));
+		this.mappoolForm.addControl(`mod-bracket-name-${newModBracket.index}`, new FormControl('', Validators.required));
+		this.mappoolForm.addControl(`mod-bracket-mods-${newModBracket.index}`, new FormControl('', Validators.required));
+		this.mappoolForm.addControl(`mod-bracket-maps-required-${newModBracket.index}`, new FormControl());
 	}
 
-	deleteBracket(modBracket: ModBracket) {
+	deleteBracket(modBracket: ModBracket): void {
 		this.mappool.removeModBracket(modBracket);
 
 		// Remove validators for modbracket fields

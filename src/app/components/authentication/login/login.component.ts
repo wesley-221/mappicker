@@ -16,9 +16,9 @@ import { EndpointMe } from '../../../models/osu-api/endpoint-me';
 })
 export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
-	error: String = null;
+	error: string = null;
 
-	isAuthenticating: boolean = false;
+	isAuthenticating = false;
 
 	constructor(public authService: AuthenticationService, private route: Router, private tournamentService: TournamentService, public osuService: OsuService) {
 		this.loginForm = new FormGroup({
@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	ngOnInit() { }
+	ngOnInit(): void { }
 
-	login() {
-		const username = this.loginForm.get('username').value,
-			password = this.loginForm.get('password').value;
+	login(): void {
+		const username = this.loginForm.get('username').value;
+		const password = this.loginForm.get('password').value;
 
 		const userRequest = new UserRequest();
 
@@ -64,16 +64,16 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	logout() {
+	logout(): void {
 		this.authService.logout();
 		this.tournamentService.importTournaments();
 	}
 
-	osuLogin() {
+	osuLogin(): void {
 		this.isAuthenticating = true;
 
 		this.osuService.startOsuOauthProcess().subscribe(token => {
-			if (token != null) {
+			if (token !== null) {
 				this.osuService.cacheOsuOauthToken(token);
 
 				this.osuService.getMeData().subscribe(me => {
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	osuLogout() {
+	osuLogout(): void {
 		this.osuService.logout();
 	}
 }

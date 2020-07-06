@@ -13,11 +13,11 @@ import { EndpointMe } from '../models/osu-api/endpoint-me';
 })
 
 export class OsuService {
-	private readonly STORE_OAUTH: string = "osu_oauth";
-	private readonly STORE_AUTHENTICATED_USER: string = "osu_authenticated_user";
+	private readonly STORE_OAUTH: string = 'osu_oauth';
+	private readonly STORE_AUTHENTICATED_USER: string = 'osu_authenticated_user';
 	private oauthResponse$: BehaviorSubject<OsuOauthToken>;
 
-	public oauthToken: String;
+	public oauthToken: string;
 	public oauthTokenExpiresAt: Date;
 
 	public authenticatedUser: EndpointMe;
@@ -32,12 +32,12 @@ export class OsuService {
 		const oauthToken = this.storeService.get(this.STORE_OAUTH);
 
 		// Check if there is a token saved
-		if (oauthToken != undefined) {
+		if (oauthToken !== undefined) {
 			this.oauthToken = oauthToken.access_token;
 			this.oauthTokenExpiresAt = oauthToken.expires;
 
-			const currentDate = new Date(),
-				tokenExpireDate = new Date(this.oauthTokenExpiresAt);
+			const currentDate = new Date();
+			const tokenExpireDate = new Date(this.oauthTokenExpiresAt);
 
 			// The token has expired
 			// TODO: auto refresh token when its expired, opt-in?
@@ -47,7 +47,7 @@ export class OsuService {
 			else {
 				const authenticatedUser = this.storeService.get(this.STORE_AUTHENTICATED_USER);
 
-				if (authenticatedUser != undefined) {
+				if (authenticatedUser !== undefined) {
 					this.authenticatedUser = EndpointMe.serializeJson(authenticatedUser);
 				}
 			}
@@ -59,19 +59,19 @@ export class OsuService {
 	 * @returns authorization url of the mappicker app
 	 */
 	private getOsuOauthUrl(): string {
-		let parameters = [
-			{ parameterName: "client_id", value: environment.osu.client_id },
-			{ parameterName: "redirect_uri", value: environment.osu.redirect_uri },
-			{ parameterName: "response_type", value: "code" },
-			{ parameterName: "scope", value: "identify%20public" }
+		const parameters = [
+			{ parameterName: 'client_id', value: environment.osu.client_id },
+			{ parameterName: 'redirect_uri', value: environment.osu.redirect_uri },
+			{ parameterName: 'response_type', value: 'code' },
+			{ parameterName: 'scope', value: 'identify%20public' }
 		];
 
-		let finalLink = "https://osu.ppy.sh/oauth/authorize?"
+		let finalLink = 'https://osu.ppy.sh/oauth/authorize?'
 
-		if (parameters != null) {
-			for (let parameter in parameters) {
-				finalLink += `${parameters[parameter].parameterName}=${parameters[parameter].value}&`
-			}
+		if (parameters !== null) {
+			parameters.forEach(parameter => {
+				finalLink += `${parameter.parameterName}=${parameter.value}&`
+			});
 
 			finalLink = finalLink.substring(0, finalLink.length - 1);
 		}
@@ -84,11 +84,11 @@ export class OsuService {
 	 */
 	private openOsuBrowserWindow(): void {
 		const BrowserWindow = this.electronService.remote.BrowserWindow;
-		let win = new BrowserWindow();
+		const win = new BrowserWindow();
 
 		win.loadURL(this.getOsuOauthUrl());
 
-		let contents = win.webContents
+		const contents = win.webContents
 		contents.on('will-redirect', (_, url) => {
 			const oauthToken = url.replace(`${environment.osu.redirect_uri}?code=`, '');
 
@@ -106,7 +106,7 @@ export class OsuService {
 	/**
 	 * Logout the currently authenticated user
 	 */
-	public logout() {
+	public logout(): void {
 		this.storeService.delete(this.STORE_AUTHENTICATED_USER);
 		this.storeService.delete(this.STORE_OAUTH);
 

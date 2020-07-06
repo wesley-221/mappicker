@@ -12,11 +12,11 @@ import { SuggestedMap } from '../../../models/mappool/suggested-map';
 import { TournamentService } from '../../../services/tournament.service';
 
 export interface SuggestAMapDialog {
-	tournament: Tournament,
-	beatmap: Beatmap,
-	mappool: Mappool,
-	modBrackets: ModBracket[],
-	submittedBy: User
+	tournament: Tournament;
+	beatmap: Beatmap;
+	mappool: Mappool;
+	modBrackets: ModBracket[];
+	submittedBy: User;
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class MappoolOverviewComponent implements OnInit {
 		private tournamentService: TournamentService) { }
 	ngOnInit(): void { }
 
-	suggestMap(tournament: Tournament) {
+	suggestMap(tournament: Tournament): void {
 		const dialogRef = this.dialog.open(SuggestAMapComponent, {
 			data: {
 				tournament: tournament
@@ -43,13 +43,13 @@ export class MappoolOverviewComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe((suggestedMap: SuggestedMap) => {
-			if (suggestedMap != null) {
-				this.mappoolService.suggestAMap(suggestedMap).subscribe(resp => {
-					let modBrackets = [];
+			if (suggestedMap !== null) {
+				this.mappoolService.suggestAMap(suggestedMap).subscribe(() => {
+					const modBrackets = [];
 
-					for (let modBracket in suggestedMap.modBrackets) {
-						modBrackets.push(suggestedMap.modBrackets[modBracket].modBracketName);
-					}
+					suggestedMap.modBrackets.forEach(modBracket => {
+						modBrackets.push(modBracket.modBracketName);
+					})
 
 					this.tournamentService.importTournaments();
 

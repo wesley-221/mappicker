@@ -29,35 +29,35 @@ export class RegisterComponent implements OnInit {
 		this.registerForm.setValidators(this.isEqualTo('password', 'password-confirmation'));
 	}
 
-	ngOnInit() { }
+	ngOnInit(): void { }
 
 	/**
 	 * Register a new user
 	 */
-	public register() {
-		const 	username = this.registerForm.get('username'),
-				password = this.registerForm.get('password'),
-				passwordConfirm = this.registerForm.get('password-confirmation');
+	public register(): void {
+		const username = this.registerForm.get('username');
+		const password = this.registerForm.get('password');
+		const passwordConfirm = this.registerForm.get('password-confirmation');
 
-		let errors: string[] = [];
+		const errors: string[] = [];
 
 		if(username.invalid) {
-			errors.push(`You have to fill in a username in order to register.`);
+			errors.push('You have to fill in a username in order to register.');
 		}
 
 		if(password.invalid) {
 			if(password.errors.required) {
-				errors.push(`You have to enter a password in order to register.`);
+				errors.push('You have to enter a password in order to register.');
 			}
 		}
 
 		if(passwordConfirm.invalid) {
 			if(passwordConfirm.errors.required) {
-				errors.push(`You have to enter the password confirmation in order to register.`);
+				errors.push('You have to enter the password confirmation in order to register.');
 			}
 
 			if(passwordConfirm.errors.notEquivalent) {
-				errors.push(`The passwords you have entered do not match.`);
+				errors.push('The passwords you have entered do not match.');
 			}
 		}
 
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
 			registerUser.password = password.value;
 			registerUser.passwordConfirm = passwordConfirm.value;
 
-			this.authService.register(registerUser).subscribe(data => {
+			this.authService.register(registerUser).subscribe(() => {
 				this.registerErrors = [];
 
 
@@ -92,8 +92,8 @@ export class RegisterComponent implements OnInit {
 	 */
 	private isEqualTo(val1: any, val2: any): ValidatorFn {
 		return (checkForm: FormGroup): any => {
-			let v1 = checkForm.controls[val1],
-				v2 = checkForm.controls[val2];
+			const v1 = checkForm.controls[val1];
+			const v2 = checkForm.controls[val2];
 
 			return v1.value === v2.value ? v2.setErrors(null) : v2.setErrors({ notEquivalent: true });
 		}

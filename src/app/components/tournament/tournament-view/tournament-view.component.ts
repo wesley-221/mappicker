@@ -15,7 +15,7 @@ export class TournamentViewComponent implements OnInit {
 	tournament: Tournament;
 	tournamentForm: FormGroup;
 
-	tournamentUpdated: boolean = false;
+	tournamentUpdated = false;
 
 	constructor(private route: ActivatedRoute, private tournamentService: TournamentService, public authService: AuthenticationService) {
 		this.tournamentForm = new FormGroup({
@@ -29,7 +29,7 @@ export class TournamentViewComponent implements OnInit {
 
 		this.route.params.subscribe(params => {
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res == true) {
+				if (res === true) {
 					const thisTournament = this.tournamentService.getTournamentById(params.id);
 					this.tournament = Tournament.makeTrueCopy(thisTournament);
 
@@ -47,7 +47,7 @@ export class TournamentViewComponent implements OnInit {
 
 	ngOnInit(): void { }
 
-	updateTournament() {
+	updateTournament(): void {
 		if (!this.tournamentForm.invalid) {
 			this.tournament.tournamentName = this.tournamentForm.get('tournament-name').value;
 			this.tournament.defaultGamemode = this.tournamentForm.get('tournament-gamemode').value;

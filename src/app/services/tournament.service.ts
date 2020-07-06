@@ -22,15 +22,15 @@ export class TournamentService {
 	/**
 	 * Import all tournaments available to the current user
 	 */
-	importTournaments() {
+	importTournaments(): void {
 		this.allTournaments = [];
 
 		this.finishedImporting$.next(false);
 
 		this.httpClient.get<Tournament[]>(`${this.apiUrl}wypicker/tournament`).subscribe(response => {
-			for (let tournament in response) {
-				this.allTournaments.push(Tournament.serializeJson(response[tournament]));
-			}
+			response.forEach(tournament => {
+				this.allTournaments.push(Tournament.serializeJson(tournament));
+			});
 
 			this.finishedImporting$.next(true);
 		});
@@ -72,9 +72,9 @@ export class TournamentService {
 	 * @param tournamentId the id of the tournament to get
 	 */
 	getTournamentById(tournamentId: number): Tournament {
-		for (let tournament in this.allTournaments) {
-			if (this.allTournaments[tournament].id == tournamentId) {
-				return this.allTournaments[tournament];
+		for (const tournament of this.allTournaments) {
+			if (tournament.id === tournamentId) {
+				return tournament;
 			}
 		}
 

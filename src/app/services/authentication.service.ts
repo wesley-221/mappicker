@@ -11,18 +11,18 @@ import { StoreService } from './store.service';
 })
 
 export class AuthenticationService {
-	public readonly authName: string = "auth";
+	public readonly authName: string = 'auth';
 	private readonly apiUrl: string = environment.apiUrl;
 	public user: User;
 	public isLoggedIn: boolean;
-	public authToken: String;
+	public authToken: string;
 
 	constructor(private httpClient: HttpClient, private storeService: StoreService) {
 		this.authToken = this.storeService.get(this.authName);
 	}
 
-	public isAdmin() {
-		return this.user != undefined && this.user.admin == true;
+	public isAdmin(): boolean {
+		return this.user !== undefined && this.user.admin === true;
 	}
 
 	/**
@@ -64,7 +64,7 @@ export class AuthenticationService {
 	 * Cache the authentication token
 	 * @param name
 	 */
-	public cacheAuthenticationToken(name: string) {
+	public cacheAuthenticationToken(name: string): void {
 		this.storeService.set(this.authName, name);
 	}
 
@@ -72,7 +72,7 @@ export class AuthenticationService {
 	 * Validate the currently saved token
 	 * @param token
 	 */
-	public validateToken(token: String) {
+	public validateToken(): Observable<any> {
 		return this.httpClient.get(`${this.apiUrl}validate-token`);
 	}
 }

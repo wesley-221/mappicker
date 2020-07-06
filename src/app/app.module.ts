@@ -18,7 +18,7 @@ import { BodyComponent } from './components/main/body/body.component';
 import { BreadcrumbComponentComponent } from './components/main/breadcrumb-component/breadcrumb-component.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
-import { AuthInterceptor } from "./guards/token-interceptor";
+import { AuthInterceptor } from './guards/token-interceptor';
 import { MappoolOverviewComponent } from './components/mappool/mappool-overview/mappool-overview.component';
 import { MappoolCreateComponent } from './components/mappool/mappool-create/mappool-create.component';
 import { LoggedInGuard } from './guards/logged-in-guard';

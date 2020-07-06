@@ -1,4 +1,4 @@
-import { Beatmapset } from "./beatmapset";
+import { Beatmapset } from './beatmapset';
 
 export class Beatmap {
 	difficulty_rating: number;
@@ -28,14 +28,14 @@ export class Beatmap {
 	total_length: number;
 	url: string;
 	beatmapset: Beatmapset;
-	failtimes: { fail: number[], exit: number[] };
+	failtimes: { fail: number[]; exit: number[] };
 	max_combo: number;
 
 	/**
 	 * Get the full name of the beatmap
 	 * @returns Artist - Song title [Difficulty] (Mapper)
 	 */
-	public getFullBeatmapName() {
+	public getFullBeatmapName(): string {
 		return `${this.beatmapset.artist} - ${this.beatmapset.title} [${this.version}] (${this.beatmapset.creator})`;
 	}
 

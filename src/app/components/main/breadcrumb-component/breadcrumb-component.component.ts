@@ -11,7 +11,7 @@ export class BreadcrumbComponentComponent implements OnInit {
 
 	constructor() { }
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.lastItem = this.menu[Object.keys(this.menu).length - 1];
 	}
 }

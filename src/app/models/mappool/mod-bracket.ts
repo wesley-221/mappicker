@@ -1,18 +1,18 @@
-import { Mods } from "../misc-osu";
+import { Mods } from '../misc-osu';
 
 export class ModBracket {
 	id: number;
 	index: number;
-	modBracketName: string = "Unnamed mod bracket";
+	modBracketName = 'Unnamed mod bracket';
 	mods: Mods[];
-	mapsRequired: number = 1;
-	modBracketColour: string;
+	mapsRequired = 1;
+	modBracketColour: string = null;
 
 	/**
 	 * Get the maps required as an array
 	 */
-	public getMapsRequiredAsArray() {
-		let mapsRequired = [];
+	public getMapsRequiredAsArray(): number[] {
+		const mapsRequired = [];
 
 		for (let i = 0; i < this.mapsRequired; i++) {
 			mapsRequired.push(i);
@@ -49,7 +49,7 @@ export class ModBracket {
 		newModBracket.modBracketName = modBracket.modBracketName;
 		newModBracket.mods = modBracket.mods;
 		newModBracket.mapsRequired = modBracket.mapsRequired;
-		newModBracket.modBracketColour = (modBracket.modBracketColour == (null || undefined) ? null : modBracket.modBracketColour);
+		newModBracket.modBracketColour = (modBracket.modBracketColour === (null || undefined) ? null : modBracket.modBracketColour);
 
 		return newModBracket;
 	}

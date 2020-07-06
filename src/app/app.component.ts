@@ -10,7 +10,7 @@ import { User } from './models/authentication/user';
 
 export class AppComponent {
 	constructor(private authService: AuthenticationService) {
-		this.authService.validateToken(authService.authToken).subscribe((response: any) => {
+		this.authService.validateToken().subscribe((response: any) => {
 			if (response.valid) {
 				const loggedInUser: User = User.serializeJson(response.user);
 

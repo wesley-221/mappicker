@@ -7,7 +7,7 @@ import { TournamentService } from '../../../services/tournament.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 
 export interface TournamentDeleteDialogData {
-	tournament: Tournament
+	tournament: Tournament;
 }
 
 @Component({
@@ -21,14 +21,14 @@ export class TournamentComponent implements OnInit {
 	constructor(private route: Router, private dialog: MatDialog, private tournamentService: TournamentService, public authService: AuthenticationService) { }
 	ngOnInit(): void { }
 
-	navigateToTournament(tournament: Tournament, event: any) {
+	navigateToTournament(tournament: Tournament, event: any): void {
 		// Check if click wasn't on a button
-		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) == -1) {
+		if (event.srcElement.className.search(/mat-icon|mat-mini-fab|mat-button-wrapper/) === -1) {
 			this.route.navigate(['tournament', tournament.id]);
 		}
 	}
 
-	deleteTournament(tournament: Tournament) {
+	deleteTournament(tournament: Tournament): void {
 		const dialogRef = this.dialog.open(DeleteTournamentComponent, {
 			data: {
 				tournament: tournament
@@ -36,7 +36,7 @@ export class TournamentComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			if (result == true) {
+			if (result === true) {
 				this.tournamentService.deleteTournament(tournament).subscribe(() => {
 					this.tournamentService.importTournaments();
 				});

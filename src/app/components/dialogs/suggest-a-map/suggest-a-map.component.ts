@@ -21,7 +21,7 @@ export class SuggestAMapComponent {
 	selectedModBrackets: ModBracket[];
 	foundBeatmap: Beatmap;
 
-	beatmapLink: string = "https://osu.ppy.sh/beatmapsets/431497#fruits/964594";
+	beatmapLink = 'https://osu.ppy.sh/beatmapsets/431497#fruits/964594';
 	selectedMappoolId: number;
 	selectedModBracketIds: number[];
 
@@ -35,16 +35,17 @@ export class SuggestAMapComponent {
 		const beatmap = new RegExp(BeatmapRegex).exec(this.beatmapLink);
 
 		// Invalid beatmap url
-		if (beatmap == null) {
+		if (beatmap === null) {
 			return;
 		}
 
-		const beatmapSetId = parseInt(beatmap[1]),
-			gamemode = beatmap[2],
-			beatmapId = parseInt(beatmap[3]);
+		// TODO: Add this one when its actually required again
+		// const beatmapSetId = parseInt(beatmap[1]);
+		const gamemode = beatmap[2];
+		const beatmapId = parseInt(beatmap[3]);
 
 		// Invalid gamemode
-		if (ValidGamemodes.indexOf(gamemode) == -1) {
+		if (!ValidGamemodes.includes(gamemode)) {
 			return;
 		}
 
@@ -61,37 +62,37 @@ export class SuggestAMapComponent {
 
 			// Check if the beatmap has already been suggested
 			this.mappoolService.isMapSuggested(suggestedMap).subscribe(response => {
-				let foundBeatmaps: SuggestedMap[] = [],
-					pickedModBrackets: string[] = [];
+				const foundBeatmaps: SuggestedMap[] = [];
+				let pickedModBrackets: string[] = [];
 
 				// Serialize the result
-				for (let suggestedMap in response) {
+				for (const suggestedMap in response) {
 					foundBeatmaps.push(SuggestedMap.serializeJson(response[suggestedMap]));
 				}
 
 				// The beatmap has been suggested once
-				if (foundBeatmaps.length == 1) {
-					for (let modBracket in foundBeatmaps[0].modBrackets) {
-						pickedModBrackets.push(foundBeatmaps[0].modBrackets[modBracket].modBracketName);
-					}
+				if (foundBeatmaps.length === 1) {
+					foundBeatmaps[0].modBrackets.forEach(modBracket => {
+						pickedModBrackets.push(modBracket.modBracketName);
+					})
 
 					this.mapIsSuggestedString = `This beatmap was already suggested by <b>${foundBeatmaps[0].submittedBy.username}<b> for <b>${foundBeatmaps[0].mappool.mappoolName}</b>: <b>${pickedModBrackets.join(', ')}</b>.`;
 				}
 				// The beatmap has been suggested more than once
 				else if (foundBeatmaps.length > 1) {
-					this.mapIsSuggestedString = `This beatmap was already suggested on multiple occasions: <ul>`;
+					this.mapIsSuggestedString = 'This beatmap was already suggested on multiple occasions: <ul>';
 
-					for (let suggestedMap in foundBeatmaps) {
+					foundBeatmaps.forEach(suggestedMap => {
 						pickedModBrackets = [];
 
-						for (let modBracket in foundBeatmaps[suggestedMap].modBrackets) {
-							pickedModBrackets.push(foundBeatmaps[suggestedMap].modBrackets[modBracket].modBracketName);
-						}
+						suggestedMap.modBrackets.forEach(modBracket => {
+							pickedModBrackets.push(modBracket.modBracketName);
+						});
 
-						this.mapIsSuggestedString += `<li>Suggested by <b>${foundBeatmaps[suggestedMap].submittedBy.username}</b> for <b>${foundBeatmaps[suggestedMap].mappool.mappoolName}</b>: <b>${pickedModBrackets.join(', ')}</b></li>`
-					}
+						this.mapIsSuggestedString += `<li>Suggested by <b>${suggestedMap.submittedBy.username}</b> for <b>${suggestedMap.mappool.mappoolName}</b>: <b>${pickedModBrackets.join(', ')}</b></li>`
+					});
 
-					this.mapIsSuggestedString += "</ul>";
+					this.mapIsSuggestedString += '</ul>';
 				}
 				// The beatmap has not been suggested yet
 				else {
@@ -101,17 +102,17 @@ export class SuggestAMapComponent {
 		});
 	}
 
-	onMappoolChange() {
+	onMappoolChange(): void {
 		this.selectedMappool = this.selectedTournament.getMappoolById(this.selectedMappoolId);
 		this.selectedModBrackets = null;
 	}
 
-	onModBracketChange() {
+	onModBracketChange(): void {
 		this.selectedModBrackets = this.selectedMappool.getModBracketsByIds(this.selectedModBracketIds);
 	}
 
-	returnSuggestedMap() {
-		let suggestedMap: SuggestAMapDialog = {
+	returnSuggestedMap(): SuggestAMapDialog {
+		const suggestedMap: SuggestAMapDialog = {
 			tournament: this.selectedTournament,
 			beatmap: this.foundBeatmap,
 			mappool: this.selectedMappool,

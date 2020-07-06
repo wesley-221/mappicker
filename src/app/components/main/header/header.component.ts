@@ -10,5 +10,5 @@ import { OsuService } from '../../../services/osu.service';
 export class HeaderComponent implements OnInit {
 	constructor(public authService: AuthenticationService, public osuService: OsuService) { }
 
-	ngOnInit() { }
+	ngOnInit(): void { }
 }

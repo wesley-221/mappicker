@@ -1,6 +1,6 @@
 export class OsuOauthToken {
-	token_type: String;
+	token_type: string;
 	expires_in: number;
-	access_token: String;
-	refresh_token: String;
+	access_token: string;
+	refresh_token: string;
 }

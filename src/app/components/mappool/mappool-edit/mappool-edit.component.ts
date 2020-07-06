@@ -29,11 +29,11 @@ export class MappoolEditComponent implements OnInit {
 		this.mappoolForm = new FormGroup({})
 
 		this.route.params.subscribe(params => {
-			const tournamentId = params.tournamentId,
-				mappoolId = params.mappoolId;
+			const tournamentId = params.tournamentId;
+			const mappoolId = params.mappoolId;
 
 			this.tournamentService.finishedImporting().subscribe(res => {
-				if (res == true) {
+				if (res === true) {
 					this.tournament = Tournament.makeTrueCopy(this.tournamentService.getTournamentById(tournamentId));
 
 					// Setup temporary variable to handle all the reactive form validation
@@ -49,21 +49,14 @@ export class MappoolEditComponent implements OnInit {
 					]));
 
 					// Setup modbrackets
-					for (let modBracket in temporaryMappool.modBrackets) {
-						temporaryMappool.modBrackets[modBracket].index = this.modBracketIndex++;
+					temporaryMappool.modBrackets.forEach(modBracket => {
+						modBracket.index = this.modBracketIndex++;
 
 						// Add validators for modbracket fields
-						this.mappoolForm.addControl(`mod-bracket-name-${temporaryMappool.modBrackets[modBracket].index}`, new FormControl(temporaryMappool.modBrackets[modBracket].modBracketName, [
-							Validators.required
-						]));
-
-						this.mappoolForm.addControl(`mod-bracket-mods-${temporaryMappool.modBrackets[modBracket].index}`, new FormControl(temporaryMappool.modBrackets[modBracket].mods, [
-							Validators.required
-						]));
-
-						this.mappoolForm.addControl(`mod-bracket-maps-required-${temporaryMappool.modBrackets[modBracket].index}`, new FormControl(temporaryMappool.modBrackets[modBracket].mapsRequired, [
-						]));
-					}
+						this.mappoolForm.addControl(`mod-bracket-name-${modBracket.index}`, new FormControl(modBracket.modBracketName, Validators.required));
+						this.mappoolForm.addControl(`mod-bracket-mods-${modBracket.index}`, new FormControl(modBracket.mods, Validators.required));
+						this.mappoolForm.addControl(`mod-bracket-maps-required-${modBracket.index}`, new FormControl(modBracket.mapsRequired));
+					});
 
 					// All the validations have been setup
 					this.mappool = Mappool.makeTrueCopy(temporaryMappool);
@@ -81,14 +74,14 @@ export class MappoolEditComponent implements OnInit {
 
 	ngOnInit(): void { }
 
-	updateMappool() {
+	updateMappool(): void {
 		if (!this.mappoolForm.invalid) {
 			this.mappool.mappoolName = this.mappoolForm.get('mappool-name').value;
 			this.mappool.bestOf = this.mappoolForm.get('mappool-match-condition').value;
 
 			this.tournament.updateMappool(this.mappool);
 
-			this.tournamentService.updateTournament(this.tournament).subscribe(response => {
+			this.tournamentService.updateTournament(this.tournament).subscribe(() => {
 				this.tournamentService.importTournaments();
 				this.alertService.success(`Successfully updated ${this.mappool.mappoolName}!`);
 

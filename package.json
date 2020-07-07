@@ -35,8 +35,10 @@
 	},
 	"devDependencies": {
 		"@angular-builders/custom-webpack": "9.1.0",
-		"@angular-devkit/build-angular": "0.901.4",
-		"@angular-eslint/builder": "0.0.1-alpha.18",
+		"@angular-devkit/build-angular": "^0.1000.1",
+		"@angular-eslint/builder": "0.0.1-alpha.32",
+		"@angular/animations": "^9.0.0 || ^10.0.0-0",
+		"@angular/cdk": "^9.2.4",
 		"@angular/cli": "9.1.4",
 		"@angular/common": "9.1.4",
 		"@angular/compiler": "9.1.4",
@@ -44,6 +46,7 @@
 		"@angular/core": "9.1.4",
 		"@angular/forms": "^9.0.0 || ^10.0.0-0",
 		"@angular/language-service": "9.1.4",
+		"@angular/material": "^9.2.4",
 		"@angular/platform-browser": "9.1.4",
 		"@angular/platform-browser-dynamic": "9.1.4",
 		"@angular/router": "9.1.4",
@@ -68,6 +71,7 @@
 		"eslint-plugin-import": "2.20.2",
 		"jasmine-core": "3.5.0",
 		"jasmine-spec-reporter": "5.0.2",
+		"jwt-decode": "^2.2.0",
 		"karma": "5.0.4",
 		"karma-coverage-istanbul-reporter": "3.0.0",
 		"karma-electron": "6.3.0",
@@ -82,11 +86,7 @@
 		"typescript": "3.8.3",
 		"wait-on": "4.0.2",
 		"webdriver-manager": "12.1.7",
-		"zone.js": "0.10.3",
-		"@angular/animations": "^9.0.0 || ^10.0.0-0",
-		"@angular/cdk": "^9.2.4",
-		"@angular/material": "^9.2.4",
-		"jwt-decode": "^2.2.0"
+		"zone.js": "0.10.3"
 	},
 	"engines": {
 		"node": ">=10.13.0"

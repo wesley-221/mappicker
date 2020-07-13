@@ -1,7 +1,8 @@
 .create-buttons {
 	margin-bottom: 16px;
 
-	button {
+	button, div {
+		display: inline-block;
 		margin-right: 8px;
 	}
 }

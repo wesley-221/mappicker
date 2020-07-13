@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
 
 					this.osuService.authenticatedUser = osuUser;
 					this.osuService.cacheAuthenticatedUser(osuUser);
+					this.osuService.isLoggedIn = true;
 
 					this.isAuthenticating = false;
 				});

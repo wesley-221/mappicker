@@ -1,7 +1,9 @@
 <h1>All mappools of {{ tournament.tournamentName }}</h1>
 <div class="create-buttons">
 	<button mat-raised-button [routerLink]="['/mappool-create', tournament.id]" color="primary"><mat-icon>add</mat-icon> create new mappool</button>
-	<button mat-raised-button (click)="suggestMap(tournament)" color="primary"><mat-icon>add</mat-icon> suggest a map</button>
+	<div matTooltip="You have to be authenticated with osu! in order to suggest a map" [matTooltipDisabled]="osuService.isLoggedIn == true">
+		<button mat-raised-button (click)="suggestMap(tournament)" color="primary" [disabled]="osuService.isLoggedIn == false"><mat-icon>add</mat-icon> suggest a map</button>
+	</div>
 </div>
 
 <div class="alert alert-info" *ngIf="tournament.mappoolCount() <= 0">

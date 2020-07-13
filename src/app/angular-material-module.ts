@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules: any[] = [
 	LayoutModule,
@@ -32,7 +33,8 @@ const modules: any[] = [
 	MatTabsModule,
 	MatDialogModule,
 	MatSliderModule,
-	MatProgressSpinnerModule
+	MatProgressSpinnerModule,
+	MatTooltipModule
 ];
 
 @NgModule({

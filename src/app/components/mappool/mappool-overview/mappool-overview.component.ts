@@ -10,6 +10,7 @@ import { AlertService } from '../../../services/alert.service';
 import { User } from '../../../models/authentication/user';
 import { SuggestedMap } from '../../../models/mappool/suggested-map';
 import { TournamentService } from '../../../services/tournament.service';
+import { OsuService } from 'app/services/osu.service';
 
 export interface SuggestAMapDialog {
 	tournament: Tournament;
@@ -31,7 +32,8 @@ export class MappoolOverviewComponent implements OnInit {
 		private dialog: MatDialog,
 		private mappoolService: MappoolService,
 		private alertService: AlertService,
-		private tournamentService: TournamentService) { }
+		private tournamentService: TournamentService,
+		public osuService: OsuService) { }
 	ngOnInit(): void { }
 
 	suggestMap(tournament: Tournament): void {

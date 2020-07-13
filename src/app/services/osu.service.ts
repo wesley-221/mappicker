@@ -21,12 +21,14 @@ export class OsuService {
 	public oauthTokenExpiresAt: Date;
 
 	public authenticatedUser: EndpointMe;
+	public isLoggedIn: boolean;
 
 	public readonly ME_ENDPOINT: EndpointOsu = new EndpointOsu('me', null, EndpointMe);
 	public readonly BEATMAP_ENDPOINT: EndpointOsu = new EndpointOsu('beatmaps', null, null);
 
 	constructor(private electronService: ElectronService, private httpClient: HttpClient, private storeService: StoreService) {
 		this.oauthResponse$ = new BehaviorSubject(null);
+		this.isLoggedIn = false;
 
 		// Validate the oauth token
 		const oauthToken = this.storeService.get(this.STORE_OAUTH);
@@ -49,6 +51,7 @@ export class OsuService {
 
 				if (authenticatedUser != undefined) {
 					this.authenticatedUser = EndpointMe.serializeJson(authenticatedUser);
+					this.isLoggedIn = true;
 				}
 			}
 		}

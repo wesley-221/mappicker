@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Tournament } from '../../../models/tournament';
 import { MappoolService } from '../../../services/mappool.service';
 import { SuggestedMap } from '../../../models/mappool/suggested-map';
@@ -19,20 +19,26 @@ export interface DeleteSuggestedMapDialog {
 })
 export class SuggestedMapsListComponent implements OnInit {
 	@Input() tournament: Tournament;
+	@Input() mapSelect: boolean;
+
+	@Input() filterByText;
+	@Input() filterByMappool: string[];
+	@Input() filterByMods: string[];
+	@Input() filterByMappicker: string[];
+
+	@Output() pickSuggestedMapEvent = new EventEmitter<SuggestedMap>();
 
 	allSuggestedMaps: SuggestedMap[] = [];
-
-	filterByText = '';
-	filterByMappool: string[];
-	filterByMods: string[];
-	filterByMappicker: string[];
 
 	constructor(
 		private mappoolService: MappoolService,
 		private dialog: MatDialog,
 		private alertService: AlertService,
 		private tournamentService: TournamentService,
-		public electronService: ElectronService) { }
+		public electronService: ElectronService) {
+		this.filterByText = '';
+		this.mapSelect = false;
+	}
 
 	ngOnInit(): void {
 		this.importSuggestedMaps(this.tournament);
@@ -113,5 +119,13 @@ export class SuggestedMapsListComponent implements OnInit {
 		}
 
 		this.triggerPipe();
+	}
+
+	/**
+	 * Pick a suggested map
+	 * @param suggestedMap
+	 */
+	pickSuggestedMap(suggestedMap: SuggestedMap): void {
+		this.pickSuggestedMapEvent.emit(suggestedMap);
 	}
 }

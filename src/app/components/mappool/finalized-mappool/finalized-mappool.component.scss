@@ -4,11 +4,85 @@
 	}
 
 	.mappool-body {
-		.mod-bracket {
-			.mod-bracket-header {
-				padding: 8px;
-				color: black;
+		display: flex;
+		flex-basis: 100%;
+
+		.mappool {
+			flex: 1;
+			padding: 8px;
+
+			.margin-buttons {
+				button {
+					margin-right: 8px;
+				}
 			}
+
+			.mod-bracket-map {
+				margin-bottom: 8px;
+
+				.beatmap-suggestion {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+
+					margin: 0;
+					padding: 8px;
+					margin-bottom: 8px;
+
+					border: 1px solid rgba(0,0,0,0.75);
+
+					-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+					-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+					box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+
+					.beatmap-column {
+						display: flex;
+						flex-basis: 100%;
+						flex: 8;
+
+						padding: 8px;
+
+						&.small {
+							flex: 1;
+						}
+
+						a {
+							cursor: pointer;
+						}
+
+						&.right-align {
+							justify-content: flex-end;
+						}
+					}
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+
+				.mod-bracket-header {
+					display: flex;
+					padding: 4px;
+					color: black;
+
+					justify-content: space-between;
+
+					.button-right {
+						display: flex;
+						align-items: center;
+					}
+				}
+
+				.mod-bracket-body {
+					margin-bottom: 8px;
+					margin-top: 8px;
+				}
+			}
+		}
+
+		.suggested-maps {
+			flex: 4;
+			padding: 8px;
 		}
 	}
 }

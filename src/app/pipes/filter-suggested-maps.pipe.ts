@@ -6,7 +6,9 @@ import { SuggestedMap } from '../models/mappool/suggested-map';
 })
 export class FilterSuggestedMapsPipe implements PipeTransform {
 	transform(allSuggestedMaps: SuggestedMap[], filterByText: string, mappool: string[], modBrackets: string[], mappickers: string[]): SuggestedMap[] {
-		filterByText = filterByText.toLowerCase();
+		if (filterByText != undefined) {
+			filterByText = filterByText.toLowerCase();
+		}
 
 		let returnSuggestedMaps: SuggestedMap[];
 

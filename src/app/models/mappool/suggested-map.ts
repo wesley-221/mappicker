@@ -43,4 +43,24 @@ export class SuggestedMap {
 
 		return newSuggestedMap;
 	}
+
+	/**
+	 * Make a true copy of the suggested map
+	 * @param suggestedMap
+	 */
+	public static makeTrueCopy(suggestedMap: SuggestedMap): SuggestedMap {
+		const newSuggestedMap = new SuggestedMap();
+
+		newSuggestedMap.tournament = Tournament.serializeJson(suggestedMap.tournament);
+		newSuggestedMap.beatmap = Beatmap.serializeJson(suggestedMap.beatmap);
+		newSuggestedMap.mappool = Mappool.serializeJson(suggestedMap.mappool);
+
+		suggestedMap.modBrackets.forEach(modBracket => {
+			newSuggestedMap.modBrackets.push(ModBracket.serializeJson(modBracket));
+		});
+
+		newSuggestedMap.submittedBy = User.serializeJson(suggestedMap.submittedBy);
+
+		return newSuggestedMap;
+	}
 }

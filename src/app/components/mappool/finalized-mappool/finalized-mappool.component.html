@@ -4,16 +4,50 @@
 	</div>
 
 	<div class="mappool-body">
-		<div class="mod-bracket" *ngFor="let modBracket of mappool.modBrackets">
-			<div class="mod-bracket-header" [style.backgroundColor]="modBracket.modBracketColour">
-				{{ modBracket.modBracketName }}
+		<div class="mappool">
+			<mat-accordion>
+				<mat-expansion-panel *ngFor="let modBracket of mappool.modBrackets">
+					<mat-expansion-panel-header>
+						<mat-panel-title>{{ modBracket.modBracketName }}</mat-panel-title>
+					</mat-expansion-panel-header>
+
+					<p>Add or remove a map for {{ modBracket.modBracketName }}.</p>
+
+					<div class="margin-buttons">
+						<button mat-raised-button color="primary" (click)="addNewMap(modBracket)" [disabled]="modBracket.allMaps.length >= modBracket.mapsRequired"><mat-icon>add</mat-icon> add new map</button>
+						<button mat-raised-button color="warn" (click)="removeMap(modBracket)" [disabled]="modBracket.allMaps.length == 0"><mat-icon>clear</mat-icon> remove last map</button>
+					</div>
+
+					<hr />
+
+					<div class="mod-bracket-map" *ngFor="let modBracketMap of modBracket.allMaps">
+						<div class="mod-bracket-header" [style.backgroundColor]="modBracket.modBracketColour">
+							<p>{{ modBracket.modBracketName }} {{ modBracketMap.index }}</p>
+							<div class="button-right"><button mat-mini-fab color="accent" (click)="findMapForModBracket(modBracket, modBracketMap.index)" [matTooltip]="'Find a map for ' + modBracket.modBracketName + ' ' + modBracketMap.index"><mat-icon>touch_app</mat-icon></button></div>
+						</div>
+
+						<div class="mod-bracket-body">
+							<div class="beatmap-suggestion" *ngIf="modBracketMap && modBracketMap.map != null">
+								<div class="beatmap-column">
+									<!-- TODO: make the link with beatmapsetid/gamemode/beatmapid -->
+									<a [href]="" (click)="electronService.openLink(modBracketMap.map.beatmap.url)">{{ modBracketMap.map.beatmap.getFullBeatmapName() }}</a>
+								</div>
+							</div>
+						</div>
+
+						<hr />
+					</div>
+				</mat-expansion-panel>
+			</mat-accordion>
+		</div>
+
+		<div class="suggested-maps" *ngIf="pickForModBracket != null">
+			<div>
+				<button mat-raised-button color="warn" (click)="clearModBracket()"><mat-icon>clear</mat-icon> cancel</button>
+				Selecting a map for {{ pickForModBracket.modBracketName }} {{ pickForModBracketMapIndex }}
 			</div>
 
-			<div class="mod-bracket-body">
-				<div class="mod-bracket-map" *ngFor="let modBracketMap of modBracket.getMapsRequiredAsArray()">
-					{{ modBracketMap }}
-				</div>
-			</div>
+			<app-suggested-maps-list [tournament]="tournament" [filterByMappool]="[mappool.mappoolName]" [filterByMods]="[pickForModBracket.modBracketName]" [mapSelect]="true" (pickSuggestedMapEvent)="pickSuggestedMap($event)"></app-suggested-maps-list>
 		</div>
 	</div>
 </div>

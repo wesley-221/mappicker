@@ -1,28 +1,27 @@
 import { Mods } from '../misc-osu';
+import { ModBracketMap } from './mod-bracket-map';
 
 export class ModBracket {
 	id: number;
 	index: number;
-	modBracketName = 'Unnamed mod bracket';
+	modBracketName: string;
 	mods: Mods[];
-	mapsRequired = 1;
-	modBracketColour: string = null;
+	mapsRequired: number;
+	modBracketColour: string;
+	allMaps: ModBracketMap[];
+	indexCount: number;
 
-	/**
-	 * Get the maps required as an array
-	 */
-	public getMapsRequiredAsArray(): number[] {
-		const mapsRequired = [];
-
-		for (let i = 0; i < this.mapsRequired; i++) {
-			mapsRequired.push(i);
-		}
-
-		return mapsRequired;
+	constructor() {
+		this.modBracketName = 'Unnamed mod bracket';
+		this.mods = [];
+		this.mapsRequired = 1;
+		this.modBracketColour = null;
+		this.allMaps = [];
+		this.indexCount = 1;
 	}
 
 	/**
-	 * Serialize the json to a tournament object
+	 * Serialize the json to a modbracket object
 	 * @param json
 	 */
 	public static serializeJson(json: any): ModBracket {

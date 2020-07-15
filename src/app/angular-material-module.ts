@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const modules: any[] = [
 	LayoutModule,
@@ -34,7 +35,8 @@ const modules: any[] = [
 	MatDialogModule,
 	MatSliderModule,
 	MatProgressSpinnerModule,
-	MatTooltipModule
+	MatTooltipModule,
+	MatExpansionModule
 ];
 
 @NgModule({
